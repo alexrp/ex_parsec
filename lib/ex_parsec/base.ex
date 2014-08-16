@@ -225,8 +225,8 @@ defmodule ExParsec.Base do
     result.
     """
     @spec both(ExParsec.t(state, result1), ExParsec.t(state, result2),
-               ((result1, result2) -> result)) :: ExParsec.t(state, result)
-          when [state: var, result1: var, result2: var, result: var]
+               ((result1, result2) -> result3)) :: ExParsec.t(state, result3)
+          when [state: var, result1: var, result2: var, result3: var]
     defparser both(parser1, parser2, function) in p do
         pipe([parser1, parser2], fn([a, b]) -> function.(a, b) end).(p)
     end
