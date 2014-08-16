@@ -161,7 +161,7 @@ defmodule ExParsec.Base do
     end
 
     @doc """
-    Applies each parser in 	`parsers`. Passes all result values in a list to
+    Applies each parser in `parsers`. Passes all result values in a list to
     `function`. `function`'s return value is returned as the result.
     """
     @spec pipe([ExParsec.t(state, term())], (([term()]) -> result)) ::
@@ -199,19 +199,25 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Applies `parser1` and `parser2` in sequence. Passes the result values as
+    two arguments to `function`. `function`'s return value is returned as the
+    result.
+    """
+    @spec both(ExParsec.t(state, result1), ExParsec.t(state, result2),
+               ((result1, result2) -> result)) :: ExParsec.t(state, result)
+          when [state: var, result1: var, result2: var, result: var]
+    defparser both(parser1, parser2, function) in p do
+        pipe([parser1, parser2], fn([a, b]) -> function.(a, b) end).(p)
+    end
+
+    @doc """
     Applies `parser1` and `parser2` in sequence. Returns the result of
     `parser1`.
     """
     @spec pair_left(ExParsec.t(state, result), ExParsec.t(state, term())) ::
           ExParsec.t(state, result) when [state: var, result: var]
     defparser pair_left(parser1, parser2) in p do
-        r = sequence([parser1, parser2]).(p)
-
-        if r.status == :ok do
-            %Reply{r | :result => hd(r.result)}
-        else
-            r
-        end
+        both(parser1, parser2, fn(a, _) -> a end).(p)
     end
 
     @doc """
@@ -221,13 +227,7 @@ defmodule ExParsec.Base do
     @spec pair_right(ExParsec.t(state, term()), ExParsec.t(state, result)) ::
           ExParsec.t(state, result) when [state: var, result: var]
     defparser pair_right(parser1, parser2) in p do
-        r = sequence([parser1, parser2]).(p)
-
-        if r.status == :ok do
-            %Reply{r | :result => hd(tl(r.result))}
-        else
-            r
-        end
+        both(parser1, parser2, fn(_, b) -> b end).(p)
     end
 
     @doc """
@@ -238,13 +238,7 @@ defmodule ExParsec.Base do
           ExParsec.t(state, {result1, result2})
           when [state: var, result1: var, result2: var]
     defparser pair_both(parser1, parser2) in p do
-        r = sequence([parser1, parser2]).(p)
-
-        if r.status == :ok do
-            %Reply{r | :result => List.to_tuple(r.result)}
-        else
-            r
-        end
+        both(parser1, parser2, fn(a, b) -> {a, b} end).(p)
     end
 
     @doc """
