@@ -326,4 +326,58 @@ defmodule ExParsec.Base do
     end
 
     # Parsers
+
+    @doc """
+    Parses a codepoint. Returns the codepoint as result.
+    """
+    @spec any_char() :: ExParsec.t(term(), String.codepoint())
+    defparser any_char() in p do
+        case Parser.get(p) do
+            {:error, r} -> failure([error(p, "encountered I/O error: #{inspect(r)}")])
+            {p, cp} -> success(p, cp)
+            :eof -> failure([error(p, "expected any codepoint")])
+        end
+    end
+
+    @doc """
+    Expects and parses the given `codepoint`. On success, returns the codepoint
+    as result.
+    """
+    @spec char(String.codepoint()) :: ExParsec.t(term(), String.codepoint())
+    defparser char(codepoint) in p do
+        case Parser.get(p) do
+            {:error, r} -> failure([error(p, "encountered I/O error: #{inspect(r)}")])
+            :eof -> failure([error(p, "expected #{inspect(codepoint)} but encountered end of file")])
+            {p, cp} ->
+                if cp == codepoint do
+                    success(p, cp)
+                else
+                    failure([error(p, "expected #{inspect(codepoint)} but found #{inspect(cp)}")])
+                end
+        end
+    end
+
+    @doc """
+    Expects and parses the given `string`. On success, returns the string as
+    result.
+    """
+    @spec string(String.t()) :: ExParsec.t(term(), String.t())
+    defparser string(string) in p do
+        sz = byte_size(string)
+
+        loop = fn(loop, accp, acc) ->
+            cond do
+                acc == string -> success(accp, acc)
+                byte_size(acc) >= sz -> failure([error(p, "expected #{inspect(string)} but found #{inspect(acc)}")])
+                true ->
+                    case Parser.get(accp) do
+                        {:error, r} -> failure([error(accp, "Encountered I/O error: #{inspect(r)}")])
+                        :eof -> failure([error(accp, "expected #{inspect(string)} but encountered end of file")])
+                        {accp, cp} -> loop.(loop, accp, acc <> cp)
+                    end
+            end
+        end
+
+        loop.(loop, p, "")
+    end
 end
