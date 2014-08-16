@@ -249,13 +249,7 @@ defmodule ExParsec.Base do
                   ExParsec.t(state, term())) :: ExParsec.t(state, result)
           when [state: var, result: var]
     defparser between(parser1, parser2, parser3) in p do
-        r = sequence([parser1, parser2, parser3]).(p)
-
-        if r.status == :ok do
-            %Reply{r | :result => hd(tl(r.result))}
-        else
-            r
-        end
+        pipe([parser1, parser2, parser3], fn([_, b, _]) -> b end).(p)
     end
 
     @doc """
