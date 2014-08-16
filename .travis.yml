@@ -13,4 +13,4 @@ before_script:
     - mix local.hex --force
     - mix deps.get --only test
 script:
-    - mix test
+    - mix test --trace
