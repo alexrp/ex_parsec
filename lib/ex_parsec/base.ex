@@ -267,23 +267,6 @@ defmodule ExParsec.Base do
     end
 
     @doc """
-    Applies `parser1`, `parser2`, and `parser3` in sequence. Returns the result
-    of `parser2`.
-    """
-    @spec between(ExParsec.t(state, term()), ExParsec.t(state, result),
-                  ExParsec.t(state, term())) :: ExParsec.t(state, result)
-          when [state: var, result: var]
-    defparser between(parser1, parser2, parser3) in p do
-        r = sequence([parser1, parser2, parser3]).(p)
-
-        if r.status == :ok do
-            %Reply{r | :result => hd(tl(r.result))}
-        else
-            r
-        end
-    end
-
-    @doc """
     Applies `parser1` and `parser2` in sequence. Returns the result of
     both parsers as a tuple.
     """
@@ -295,6 +278,23 @@ defmodule ExParsec.Base do
 
         if r.status == :ok do
             %Reply{r | :result => List.to_tuple(r.result)}
+        else
+            r
+        end
+    end
+
+    @doc """
+    Applies `parser1`, `parser2`, and `parser3` in sequence. Returns the result
+    of `parser2`.
+    """
+    @spec between(ExParsec.t(state, term()), ExParsec.t(state, result),
+                  ExParsec.t(state, term())) :: ExParsec.t(state, result)
+          when [state: var, result: var]
+    defparser between(parser1, parser2, parser3) in p do
+        r = sequence([parser1, parser2, parser3]).(p)
+
+        if r.status == :ok do
+            %Reply{r | :result => hd(tl(r.result))}
         else
             r
         end
