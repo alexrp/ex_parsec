@@ -93,6 +93,27 @@ defmodule ExParsec.Base do
     # Combinators
 
     @doc """
+    Applies `parser` and passes its result as the only argument to `function`.
+    `function` is expected to return a parser. That parser is then applied and
+    its result is returned.
+    """
+    @spec bind(ExParsec.t(state, result1), ((result1) -> ExParsec.t(state, result2))) ::
+          ExParsec.t(state, result2) when [state: var, result1: var, result2: var]
+    defparser bind(parser, function) in p do
+        r1 = parser.(p)
+
+        if r1.status == :ok do
+            parser2 = function.(r1.result)
+            r2 = parser2.(r1.parser)
+            errs = List.flatten([r2.errors | r1.errors])
+
+            %Reply{r2 | :errors => errs}
+        else
+            r1
+        end
+    end
+
+    @doc """
     Applies `parser` if possible. Returns a tuple containing `:ok` and the
     result, or `nil` if `parser` could not be applied.
     """
