@@ -83,6 +83,8 @@ defmodule ExParsec.Base do
     """
     @spec eof() :: ExParsec.t(term(), nil)
     defparser eof() in p do
+        # We can skip `ExParsec.Parser.get/1` since we just need to check for
+        # EOF - we don't care about position info.
         if Input.get(p.input) == :eof do
             success(p, nil)
         else
