@@ -3,48 +3,12 @@ defmodule ExParsec.Base do
     Provides fundamental combinators and parsers.
     """
 
-    import ExParsec.Macro
+    import ExParsec.Helpers
 
-    alias ExParsec.Error
     alias ExParsec.Input
     alias ExParsec.Parser
     alias ExParsec.Position
     alias ExParsec.Reply
-
-    # Helpers
-
-    @doc """
-    Constructs a successful `ExParsec.Reply` with `result` as the result value.
-    `errors` can optionally be used to propagate error messages, if any.
-    """
-    @spec success(Parser.t(state), result, [Error.t()]) ::
-          Reply.t(state, result) when [state: var, result: var]
-    def success(parser, result, errors \\ []) do
-        %Reply{parser: parser,
-               errors: errors,
-               result: result}
-    end
-
-    @doc """
-    Constructs an unsuccessful `ExParsec.Reply` with `status` (either `:error`
-    or `:fatal`) as the error kind and `errors` as the list of errors.
-    """
-    @spec failure(:error | :fatal, [Error.t()]) ::
-          Reply.t(term(), nil) when [state: var, result: var]
-    def failure(status \\ :error, errors) do
-        %Reply{status: status,
-               errors: errors}
-    end
-
-    @doc """
-    Constructs an `ExParsec.Error` with the given `message` and the current
-    position from `parser`.
-    """
-    @spec error(Parser.t(term()), String.t()) :: Error.t() when [state: var]
-    def error(parser, message) do
-        %Error{message: message,
-               position: parser.position}
-    end
 
     # State
 

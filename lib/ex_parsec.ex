@@ -8,7 +8,7 @@ defmodule ExParsec do
 
     * `ExParsec`
     * `ExParsec.Base`
-    * `ExParsec.Macro`
+    * `ExParsec.Helpers`
 
     It will also `alias` the following modules:
 
@@ -31,7 +31,7 @@ defmodule ExParsec do
         quote do
             import ExParsec
             import ExParsec.Base
-            import ExParsec.Macro
+            import ExParsec.Helpers
 
             alias ExParsec.Error
             alias ExParsec.Input
