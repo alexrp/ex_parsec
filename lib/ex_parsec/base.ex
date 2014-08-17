@@ -448,6 +448,14 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses a white space character.
+    """
+    @spec space() :: ExParsec.t(term(), String.codepoint())
+    defparser space() in p do
+        satisfy("white space character", fn(c) -> String.strip(c) == "" end).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
@@ -469,5 +477,13 @@ defmodule ExParsec.Base do
         end
 
         loop.(loop, p, "")
+    end
+
+    @doc """
+    Parses as many white space characters as possible.
+    """
+    @spec spaces() :: ExParsec.t(term(), [String.codepoint()])
+    defparser spaces() in p do
+        many(space()).(p)
     end
 end
