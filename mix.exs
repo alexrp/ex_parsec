@@ -32,7 +32,7 @@ defmodule ExParsec.Mixfile do
         [contributors: ["Alex Rønne Petersen"],
          licenses: ["MIT"],
          links: %{"GitHub" => "https://github.com/alexrp/ex_parsec",
-                  "Documentation" => "http://alexrp.github.io/ex_parsec"}]
+                  "Documentation" => "http://alexrp.com/ex_parsec"}]
     end
 
     defp aliases() do
