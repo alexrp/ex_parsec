@@ -3,7 +3,10 @@ defmodule ExParsec.Helpers do
     Provides utility functions and macros for writing parser functions.
     """
 
+    require ExParsec.Monad.Parse
+
     alias ExParsec.Error
+    alias ExParsec.Monad.Parse
     alias ExParsec.Parser
     alias ExParsec.Reply
 
@@ -31,6 +34,62 @@ defmodule ExParsec.Helpers do
         quote [location: :keep] do
             def unquote(call) do
                 fn(unquote(parg)) ->
+                    unquote(block)
+                end
+            end
+        end
+    end
+
+    @doc """
+    Defines a monadic parser function.
+
+    A monadic parser function's body is defined through the
+    `ExParsec.Monad.Parse.m/1` macro. Inside such a function, the `<-`
+    operator can be used to bind names to parser invocations. Values
+    can be returned by using the special `return` macro.
+
+    For example, consider this parser to parse a field declaration in a
+    programming language:
+
+        use ExParsec
+
+        defparser field() in p do
+            bind(type(), fn(ty) ->
+                sequence([skip_many(space),
+                          char(":"),
+                          skip_many(space),
+                          bind(identifier(), fn(id) ->
+                              return(%Field{type: ty, name: id})
+                          end)])
+            end)
+        end
+
+    This is quite unwieldy. Modifying this at a later point would be a rather
+    complicated matter.
+
+    We can write this in a much more readable and maintainable way with monadic
+    syntax:
+
+        use ExParsec
+
+        defmparser field() do
+            ty <- type()
+            skip_many(space)
+            char(":")
+            skip_many(space)
+            id <- identifier()
+            return %Field{type: ty, name: id}
+        end
+
+    It's now very clear what the parser is doing. There is virtually no syntax
+    noise. Modifying this parser later down the road would also be much easier.
+    """
+    defmacro defmparser(sig, [do: block]) do
+        quote [location: :keep] do
+            require ExParsec.Monad.Parse
+
+            def unquote(sig) do
+                Parse.m do
                     unquote(block)
                 end
             end

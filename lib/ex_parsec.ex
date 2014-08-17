@@ -14,6 +14,7 @@ defmodule ExParsec do
 
     * `ExParsec.Error`
     * `ExParsec.Input`
+    * `ExParsec.Monad.Parse`
     * `ExParsec.Parser`
     * `ExParsec.Position`
     * `ExParsec.Reply`
@@ -35,6 +36,7 @@ defmodule ExParsec do
 
             alias ExParsec.Error
             alias ExParsec.Input
+            alias ExParsec.Monad.Parse
             alias ExParsec.Parser
             alias ExParsec.Position
             alias ExParsec.Reply
