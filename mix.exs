@@ -21,8 +21,11 @@ defmodule ExParsec.Mixfile do
     end
 
     defp docs() do
+        {ref, 0} = System.cmd("git", ["rev-parse", "--verify", "--quiet", "HEAD"])
+
         [main: "README",
-         readme: true]
+         readme: true,
+         source_ref: ref]
     end
 
     defp package() do
