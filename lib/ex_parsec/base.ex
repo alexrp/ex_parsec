@@ -332,13 +332,19 @@ defmodule ExParsec.Base do
           when [state: var, result: var]
     defparser many(parser) in p do
         loop = fn(loop, p, ress, errs) ->
-            r = parser.(p)
-            errs = List.flatten([r.errors | errs])
+            # We can skip `ExParsec.Parser.get/1` since we just need to check for
+            # EOF - we don't care about position info.
+            if Input.get(p.input) == :eof do
+                success(p, Enum.reverse(ress), errs)
+            else
+                r = parser.(p)
+                errs = List.flatten([r.errors | errs])
 
-            case r.status do
-                :ok -> loop.(loop, r.parser, [r.result | ress], errs)
-                :error -> success(p, Enum.reverse(ress), errs)
-                :fatal -> %Reply{r | :errors => errs}
+                case r.status do
+                    :ok -> loop.(loop, r.parser, [r.result | ress], errs)
+                    :error -> success(p, Enum.reverse(ress), errs)
+                    :fatal -> %Reply{r | :errors => errs}
+                end
             end
         end
 
