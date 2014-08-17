@@ -380,6 +380,28 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses a codepoint that satisfies the criteria required by
+    `function`. `name` is used for error message generation.
+    """
+    @spec satisfy(String.t(), ((String.codepoint()) -> boolean())) ::
+          ExParsec.t(term(), String.codepoint())
+    defparser satisfy(name, function) in p do
+        r = any_char().(p)
+
+        if r.status == :ok do
+            cp = r.result
+
+            if function.(cp) do
+                r
+            else
+                failure([error(p, "expected #{name} but found #{inspect(cp)}")])
+            end
+        else
+            r
+        end
+    end
+
+    @doc """
     Expects and parses the given `codepoint`. On success, returns the codepoint
     as result.
     """
