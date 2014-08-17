@@ -106,6 +106,15 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Applies `parser` and discards its result.
+    """
+    @spec ignore(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
+          when [state: var]
+    defparser ignore(parser) in p do
+        map(parser, fn(_) -> nil end).(p)
+    end
+
+    @doc """
     Applies `parser` and passes its result as the only argument to `function`.
     `function` is expected to return a parser. That parser is then applied and
     its result is returned.
