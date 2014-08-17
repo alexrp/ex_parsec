@@ -59,10 +59,10 @@ defmodule ExParsec do
     * A tuple containing `:ok`, the final user state, and the result.
     * A tuple containing `:error` and a list of `ExParsec.Error` instances.
     """
-    @spec parse(t(state, result), Input.t(), state) ::
+    @spec parse(Input.t(), t(state, result), state) ::
           {:ok, state, result} | {:error, [Error.t()]}
           when [state: var, result: var]
-    def parse(function, input, state \\ nil) do
+    def parse(input, function, state \\ nil) do
         parser = %Parser{input: input, state: state}
         reply = function.(parser)
 
@@ -80,21 +80,21 @@ defmodule ExParsec do
     Constructs an `ExParsec.Input.MemoryInput` instance with the given `string`
     and forwards to `parse/3`.
     """
-    @spec parse_string(t(state, result), String.t(), state) ::
+    @spec parse_string(String.t(), t(state, result), state) ::
           {:ok, state, result} | {:error, [Error.t()]}
           when [state: var, result: var]
-    def parse_string(function, string, state \\ nil) do
-        parse(function, %MemoryInput{value: string}, state)
+    def parse_string(string, function, state \\ nil) do
+        parse(%MemoryInput{value: string}, function, state)
     end
 
     @doc """
     Constructs an `ExParsec.Input.FileInput` instance with the given `device`
     and forwards to `parse/3`.
     """
-    @spec parse_file(t(state, result), File.io_device(), state) ::
+    @spec parse_file(File.io_device(), t(state, result), state) ::
           {:ok, state, result} | {:error, [Error.t()]}
           when [state: var, result: var]
-    def parse_file(function, device, state \\ nil) do
-        parse(function, %FileInput{device: device}, state)
+    def parse_file(device, function, state \\ nil) do
+        parse(%FileInput{device: device}, function, state)
     end
 end
