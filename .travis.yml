@@ -5,12 +5,12 @@ otp_release:
 before_install:
     - git clone git://github.com/elixir-lang/elixir.git
     - cd elixir
-    - git checkout v0.15.1
+    - git checkout master
     - make
     - cd ..
 before_script:
     - export PATH=`pwd`/elixir/bin:$PATH
     - mix local.hex --force
-    - mix deps.get --only test
 script:
-    - mix test --trace
+    - mix make
+    - mix test
