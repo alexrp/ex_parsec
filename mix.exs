@@ -37,7 +37,7 @@ defmodule ExParsec.Mixfile do
     end
 
     defp aliases() do
-        [make: ["deps.get", "docs"],
+        [make: ["deps.get", "deps.compile", "docs"],
          test: "test --trace --cover"]
     end
 end
