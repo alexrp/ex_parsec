@@ -139,9 +139,9 @@ defmodule ExParsec.Base do
     Applies `parser` if possible. Returns a tuple containing `:ok` and the
     result, or `nil` if `parser` could not be applied.
     """
-    @spec optional(ExParsec.t(state, result)) :: ExParsec.t(state, {:ok, result} | nil)
+    @spec option(ExParsec.t(state, result)) :: ExParsec.t(state, {:ok, result} | nil)
           when [state: var, result: var]
-    defparser optional(parser) in p do
+    defparser option(parser) in p do
         r = parser.(p)
 
         case r.status do
