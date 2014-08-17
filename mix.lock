@@ -1,2 +1,2 @@
 %{"dialyze": {:package, "0.1.2"},
-  "ex_doc": {:package, "0.5.1"}}
+  "ex_doc": {:package, "0.5.2"}}
