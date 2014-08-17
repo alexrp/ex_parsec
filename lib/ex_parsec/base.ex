@@ -411,6 +411,43 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses a codepoint that's present in `codepoints`, which can
+    either be a list of codepoints, or a string that's converted to a list of
+    codepoints.
+    """
+    @spec one_of([String.codepoint()] | String.t()) ::
+          ExParsec.t(term(), String.codepoint())
+    defparser one_of(codepoints) in p do
+        if is_binary(codepoints) do
+            codepoints = String.codepoints(codepoints)
+        end
+
+        name = codepoints |>
+               Enum.map(&inspect/1) |>
+               Enum.join(", ")
+
+        satisfy(name, fn(c) -> c in codepoints end).(p)
+    end
+
+    @doc """
+    The opposite of `one_of/1`: Expects a codepoint that's *not* in
+    `codepoints`. Otherwise, works like `one_of/1`.
+    """
+    @spec none_of([String.codepoint()] | String.t()) ::
+          ExParsec.t(term(), String.codepoint())
+    defparser none_of(codepoints) in p do
+        if is_binary(codepoints) do
+            codepoints = String.codepoints(codepoints)
+        end
+
+        name = codepoints |>
+               Enum.map(&inspect/1) |>
+               Enum.join(", ")
+
+        satisfy(name, fn(c) -> !(c in codepoints) end).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
