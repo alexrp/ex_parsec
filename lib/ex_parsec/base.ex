@@ -336,8 +336,8 @@ defmodule ExParsec.Base do
             errs = List.flatten([r.errors | errs])
 
             case r.status do
-                :ok -> loop.(loop, r.parser, Enum.reverse([r.result | ress]), errs)
-                :error -> success(p, ress, errs)
+                :ok -> loop.(loop, r.parser, [r.result | ress], errs)
+                :error -> success(p, Enum.reverse(ress), errs)
                 :fatal -> %Reply{r | :errors => errs}
             end
         end
