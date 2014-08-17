@@ -461,17 +461,20 @@ defmodule ExParsec.Base do
     """
     @spec string(String.t()) :: ExParsec.t(term(), String.t())
     defparser string(string) in p do
-        sz = byte_size(string)
+        sz = length(String.codepoints((string)))
 
         loop = fn(loop, accp, acc) ->
             cond do
                 acc == string -> success(accp, acc)
-                byte_size(acc) >= sz -> failure([error(p, "expected #{inspect(string)} but found #{inspect(acc)}")])
+                length(String.codepoints(acc)) >= sz ->
+                    failure([error(p, "expected #{inspect(string)} but found #{inspect(acc)}")])
                 true ->
-                    case Parser.get(accp) do
-                        {:error, r} -> failure([error(accp, "Encountered I/O error: #{inspect(r)}")])
-                        :eof -> failure([error(accp, "expected #{inspect(string)} but encountered end of file")])
-                        {accp, cp} -> loop.(loop, accp, acc <> cp)
+                    r = any_char().(accp)
+
+                    if r.status == :ok do
+                        loop.(loop, r.parser, acc <> r.result)
+                    else
+                        r
                     end
             end
         end
