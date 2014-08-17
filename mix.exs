@@ -11,7 +11,8 @@ defmodule ExParsec.Mixfile do
          homepage_url: "https://hex.pm/packages/ex_parsec",
          deps: deps(),
          docs: docs(),
-         package: package()]
+         package: package(),
+         aliases: aliases()]
     end
 
     defp deps() do
@@ -28,5 +29,9 @@ defmodule ExParsec.Mixfile do
         [contributors: ["Alex Rønne Petersen"],
          licenses: ["MIT"],
          links: %{"GitHub" => "https://github.com/alexrp/ex_parsec"}]
+    end
+
+    defp aliases() do
+        [test: "test --trace"]
     end
 end
