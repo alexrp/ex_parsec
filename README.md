@@ -25,11 +25,11 @@ iex> ExParsec.parse_string "foo", many(any_char())
 iex> ExParsec.parse_string "[x]", between(char("["), char("x"), char("]"))
 {:ok, nil, "x"}
 iex> ExParsec.parse_string "  spa ces  ",
-                           sequence([skip_many(space),
+                           sequence([skip(spaces),
                                      times(any_char(), 3),
                                      skip(space),
                                      times(any_char(), 3),
-                                     skip_many(space),
+                                     skip(spaces),
                                      eof])
 {:ok, nil, [nil, ["s", "p", "a"], nil, ["c", "e", "s"], nil, nil]}
 ```
@@ -41,6 +41,7 @@ iex> ExParsec.parse_string "  spa ces  ",
 * Full UTF-8 string support.
 * Non-text input can be parsed (e.g. tokens).
 * Support for theoretically infinitely large files.
+* Monadic parse blocks based on Elixir macros.
 * Simple, extensible API surface.
 
 ## Examples
