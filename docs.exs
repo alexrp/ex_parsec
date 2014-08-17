@@ -1,4 +1,4 @@
-Mix.Task.run("do", "deps.get", "deps.compile", "docs")
+Mix.Task.run("make")
 ghp = "gh-pages"
 {b, 0} = System.cmd("git", ["rev-parse", "--abbrev-ref", "HEAD"])
 {_, 0} = System.cmd("git", ["checkout", ghp])
