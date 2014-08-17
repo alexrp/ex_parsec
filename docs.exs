@@ -10,5 +10,3 @@ File.rm_rf! "docs"
 {_, 0} = System.cmd("git", ["commit", "--message", "\"Update documentation.\""])
 {_, 0} = System.cmd("git", ["push", "origin", ghp])
 {_, 0} = System.cmd("git", ["checkout", String.strip(b)])
-{_, 0} = System.cmd("git", ["checkout", "."])
-{_, 0} = System.cmd("git", ["clean", "-d", "--force", "-x"])
