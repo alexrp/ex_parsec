@@ -407,16 +407,7 @@ defmodule ExParsec.Base do
     """
     @spec char(String.codepoint()) :: ExParsec.t(term(), String.codepoint())
     defparser char(codepoint) in p do
-        case Parser.get(p) do
-            {:error, r} -> failure([error(p, "encountered I/O error: #{inspect(r)}")])
-            :eof -> failure([error(p, "expected #{inspect(codepoint)} but encountered end of file")])
-            {p, cp} ->
-                if cp == codepoint do
-                    success(p, cp)
-                else
-                    failure([error(p, "expected #{inspect(codepoint)} but found #{inspect(cp)}")])
-                end
-        end
+        satisfy(inspect(codepoint), fn(c) -> c == codepoint end).(p)
     end
 
     @doc """
