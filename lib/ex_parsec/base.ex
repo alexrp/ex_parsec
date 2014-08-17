@@ -95,6 +95,17 @@ defmodule ExParsec.Base do
     # Combinators
 
     @doc """
+    Applies `parser` and passes its result to `function`. `function`'s return
+    value is returned as the result.
+    """
+    @spec map(ExParsec.t(state, result1), ((result1) -> result2)) ::
+          ExParsec.t(state, result2)
+          when [state: var, result1: var, result2: var]
+    defparser map(parser, function) in p do
+        pipe([parser], fn([r]) -> function.(r) end).(p)
+    end
+
+    @doc """
     Applies `parser` and passes its result as the only argument to `function`.
     `function` is expected to return a parser. That parser is then applied and
     its result is returned.
