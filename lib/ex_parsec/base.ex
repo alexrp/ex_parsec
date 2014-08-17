@@ -345,6 +345,26 @@ defmodule ExParsec.Base do
         loop.(loop, p, [], [])
     end
 
+    @doc """
+    Applies `parser` if possible. Discards the result.
+    """
+    @spec skip(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
+          when [state: var]
+    defparser skip(parser) in p do
+        # TODO: Optimize this so we don't build up a ton of data.
+        ignore(option(parser)).(p)
+    end
+
+    @doc """
+    Applies `parser` as many times as possible. Discards the results.
+    """
+    @spec skip_many(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
+          when [state: var]
+    defparser skip_many(parser) in p do
+        # TODO: Optimize this so we don't build up a ton of data.
+        ignore(many(parser)).(p)
+    end
+
     # Parsers
 
     @doc """
