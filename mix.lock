@@ -1,3 +1,4 @@
 %{"dialyze": {:package, "0.1.2"},
+  "earmark": {:package, "0.1.10"},
   "ex_doc": {:package, "0.5.2"},
   "monad": {:package, "1.0.3"}}

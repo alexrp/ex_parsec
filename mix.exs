@@ -17,6 +17,7 @@ defmodule ExParsec.Mixfile do
 
     defp deps() do
         [{:dialyze, "~> 0.1", only: [:dev]},
+         {:earmark, "~> 0.1.10", only: [:dev]},
          {:ex_doc, "~> 0.5", only: [:dev]},
          {:monad, "~> 1.0.3"}]
     end
