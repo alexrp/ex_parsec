@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>README</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="readme.html">README</a></div>
+      <h1 id="exparsec">ExParsec</h1>
+<p><a href="https://travis-ci.org/alexrp/ex_parsec"><embed src="https://travis-ci.org/alexrp/ex_parsec.png?branch=master"></a></p>
+<p>A parser combinator library inspired by Parsec.</p>
+<h2 id="usage">Usage</h2>
+<p>Add ExParsec as a dependency in your <code>mix.exs</code> file:</p>
+<pre class="elixir"><code>def deps do
+  [ {:ex_parsec, &quot;~&gt; 0.0.0&quot;} ]
+end</code></pre>
+<p>After you are done, run <code>mix deps.get</code> in your shell to fetch and compile ExParsec. Start an interactive Elixir shell with <code>iex -S mix</code>.</p>
+<pre class="iex"><code>iex&gt; import ExParsec.Base
+nil
+iex&gt; ExParsec.parse_string &quot;foo&quot;, many(any_char())
+{:ok, nil, [&quot;f&quot;, &quot;o&quot;, &quot;o&quot;]}
+iex&gt; ExParsec.parse_string &quot;[x]&quot;, between(char(&quot;[&quot;), char(&quot;x&quot;), char(&quot;]&quot;))
+{:ok, nil, &quot;x&quot;}
+iex&gt; ExParsec.parse_string &quot;  spa ces  &quot;,
+                           sequence([skip_many(space),
+                                     times(any_char(), 3),
+                                     skip(space),
+                                     times(any_char(), 3),
+                                     skip_many(space),
+                                     eof])
+{:ok, nil, [nil, [&quot;s&quot;, &quot;p&quot;, &quot;a&quot;], nil, [&quot;c&quot;, &quot;e&quot;, &quot;s&quot;], nil, nil]}</code></pre>
+<h2 id="features">Features</h2>
+<ul>
+<li>Can parse context-sensitive grammars.</li>
+<li>High-quality error messages readable by humans.</li>
+<li>Full UTF-8 string support.</li>
+<li>Non-text input can be parsed (e.g. tokens).</li>
+<li>Support for theoretically infinitely large files.</li>
+<li>Simple, extensible API surface.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+
+    </div>
+  </body>
+</html>
+

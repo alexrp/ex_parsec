@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExParsec</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a></div>
+
+      <h1>
+        ExParsec
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+          <li><a href="#types_details">Types</a></li>
+        
+      </ul>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>A parser combinator library inspired by Parsec.</p>
+<p>This module provides convenient entry point functions for running parsers.</p>
+<p>This module can also be <code>use</code>d. Doing so <code>import</code>s the following modules:</p>
+<ul>
+<li><a href="ExParsec.html"><code>ExParsec</code></a></li>
+<li><a href="ExParsec.Base.html"><code>ExParsec.Base</code></a></li>
+<li><a href="ExParsec.Helpers.html"><code>ExParsec.Helpers</code></a></li>
+</ul>
+<p>It will also <code>alias</code> the following modules:</p>
+<ul>
+<li><a href="ExParsec.Error.html"><code>ExParsec.Error</code></a></li>
+<li><a href="ExParsec.Input.html"><code>ExParsec.Input</code></a></li>
+<li><a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a></li>
+<li><a href="ExParsec.Position.html"><code>ExParsec.Position</code></a></li>
+<li><a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a></li>
+</ul>
+
+        </div>
+      
+
+      
+        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec.ex#L1" class="view_source">Source</a>
+      
+
+      
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#parse/3">parse(input, function, state \\ nil)</a></td>
+  
+    <td class="summary_synopsis"><p>Parses the given <code>input</code> by applying the parser <code>function</code> to it. <code>state</code> can optionally be given to parse with user state</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#parse_file/3">parse_file(device, function, state \\ nil)</a></td>
+  
+    <td class="summary_synopsis"><p>Constructs an <a href="ExParsec.Input.FileInput.html"><code>ExParsec.Input.FileInput</code></a> instance with the given <code>device</code> and forwards to <a href="#parse/3"><code>parse/3</code></a></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#parse_string/3">parse_string(string, function, state \\ nil)</a></td>
+  
+    <td class="summary_synopsis"><p>Constructs an <a href="ExParsec.Input.MemoryInput.html"><code>ExParsec.Input.MemoryInput</code></a> instance with the given <code>string</code> and forwards to <a href="#parse/3"><code>parse/3</code></a></p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+        <div id="types_details" class="details_list">
+          <h2>Types <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></h2>
+          <div class="type_detail">
+  <p class="typespec" id="t:t/2">
+    <a href="#t:t/2">t(state, result)</a> :: (<a href="ExParsec.Parser.html#t:t/1">ExParsec.Parser.t(state)</a> -> {<a href="ExParsec.Reply.html#t:t/2">ExParsec.Reply.t(state, result)</a>})
+  </p>
+  
+      <div class="typespec_doc"><p>The type of a parser function.</p>
+<p>A parser function receives the <a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a> instance as its first and only argument. It is expected to return an <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> instance that describes the result of applying the function.</p>
+</div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <div class="detail_header" id="parse/3">
+    <span class="signature"><strong>parse(input, function, state \\ nil)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#parse/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>parse(<a href="ExParsec.Input.html#t:t/0">ExParsec.Input.t</a>, <a href="#t:t/2">t(state, result)</a>, state) :: {:ok, state, result} | {:error, [<a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a>]} when state: var, result: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses the given <code>input</code> by applying the parser <code>function</code> to it. <code>state</code> can optionally be given to parse with user state.</p>
+<p>Returns either:</p>
+<ul>
+<li>A tuple containing <code>:ok</code>, the final user state, and the result.</li>
+<li>A tuple containing <code>:error</code> and a list of <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> instances.</li>
+</ul>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec.ex#L65" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="parse_file/3">
+    <span class="signature"><strong>parse_file(device, function, state \\ nil)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#parse_file/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>parse_file(<a href="http://elixir-lang.org/docs/stable/elixir/File.html#t:io_device/0">File.io_device</a>, <a href="#t:t/2">t(state, result)</a>, state) :: {:ok, state, result} | {:error, [<a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a>]} when state: var, result: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Constructs an <a href="ExParsec.Input.FileInput.html"><code>ExParsec.Input.FileInput</code></a> instance with the given <code>device</code> and forwards to <a href="#parse/3"><code>parse/3</code></a>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec.ex#L97" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="parse_string/3">
+    <span class="signature"><strong>parse_string(string, function, state \\ nil)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#parse_string/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>parse_string(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="#t:t/2">t(state, result)</a>, state) :: {:ok, state, result} | {:error, [<a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a>]} when state: var, result: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Constructs an <a href="ExParsec.Input.MemoryInput.html"><code>ExParsec.Input.MemoryInput</code></a> instance with the given <code>string</code> and forwards to <a href="#parse/3"><code>parse/3</code></a>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec.ex#L86" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>

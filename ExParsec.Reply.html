@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExParsec.Reply</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Reply.html">Reply</a></div>
+
+      <h1>
+        ExParsec.Reply
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+          <li><a href="#types_details">Types</a></li>
+        
+      </ul>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>Represents the result of executing a parser function.</p>
+<ul>
+<li><code>parser</code> is the advanced <a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a> instance. If <code>status</code> is not <code>:ok</code>, this field must be <code>nil</code>.</li>
+<li><code>status</code> is either <code>:ok</code> for a successful parse, <code>:error</code> for an unsuccessful parse, or <code>:fatal</code> for an unrecoverable parse error.</li>
+<li><code>errors</code> is the list of <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> instances representing any errors encountered when running the parser function. This list can contain duplicate entries.</li>
+<li><code>result</code> is whatever result data the parser function returned. If <code>status</code> is not <code>:ok</code>, this field must be <code>nil</code>.</li>
+</ul>
+<p>If a parser function returns a <code>status</code> value of <code>:fatal</code>, the calling function must propagate this value further up the call stack such that the entire parse operation fails.</p>
+
+        </div>
+      
+
+      
+        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/reply.ex#L1" class="view_source">Source</a>
+      
+
+      
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#reply?/1">reply?(value)</a></td>
+  
+    <td class="summary_synopsis"><p>Checks if <code>value</code> is an <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> instance</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+        <div id="types_details" class="details_list">
+          <h2>Types <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></h2>
+          <div class="type_detail">
+  <p class="typespec" id="t:t/2">
+    <a href="#t:t/2">t(state, result)</a> :: %ExParsec.Reply{parser: <a href="ExParsec.Parser.html#t:t/1">ExParsec.Parser.t(state)</a> | nil, status: :ok | :error | :fatal, errors: [<a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a>], result: result}
+  </p>
+  
+      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> instance.</p>
+</div>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <div class="detail_header" id="reply?/1">
+    <span class="signature"><strong>reply?(value)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#reply?/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>reply?(term) :: boolean</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Checks if <code>value</code> is an <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> instance.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/reply.ex#L40" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>

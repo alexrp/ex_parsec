@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExParsec.Helpers</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Helpers.html">Helpers</a></div>
+
+      <h1>
+        ExParsec.Helpers
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+          <li><a href="#macros_details">Macros</a></li>
+        
+        
+        
+      </ul>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>Provides utility functions and macros for writing parser functions.</p>
+
+        </div>
+      
+
+      
+        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/helpers.ex#L1" class="view_source">Source</a>
+      
+
+      
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#defparser/2">defparser(sig, list2)</a></td>
+  
+    <td class="summary_synopsis"><p>Defines a parser function. This is a convenience macro that eliminates some very common syntax noise</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#error/2">error(parser, message)</a></td>
+  
+    <td class="summary_synopsis"><p>Constructs an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> with the given <code>message</code> and the current position from <code>parser</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#failure/2">failure(status \\ :error, errors)</a></td>
+  
+    <td class="summary_synopsis"><p>Constructs an unsuccessful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>status</code> (either <code>:error</code> or <code>:fatal</code>) as the error kind and <code>errors</code> as the list of errors</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#success/3">success(parser, result, errors \\ [])</a></td>
+  
+    <td class="summary_synopsis"><p>Constructs a successful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>result</code> as the result value. <code>errors</code> can optionally be used to propagate error messages, if any</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <div class="detail_header" id="error/2">
+    <span class="signature"><strong>error(parser, message)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#error/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>error(<a href="ExParsec.Parser.html#t:t/1">ExParsec.Parser.t(term)</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Constructs an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> with the given <code>message</code> and the current position from <code>parser</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/helpers.ex#L68" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="failure/2">
+    <span class="signature"><strong>failure(status \\ :error, errors)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#failure/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>failure(:error | :fatal, [<a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a>]) :: <a href="ExParsec.Reply.html#t:t/2">ExParsec.Reply.t(term, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Constructs an unsuccessful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>status</code> (either <code>:error</code> or <code>:fatal</code>) as the error kind and <code>errors</code> as the list of errors.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/helpers.ex#L58" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="success/3">
+    <span class="signature"><strong>success(parser, result, errors \\ [])</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#success/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>success(<a href="ExParsec.Parser.html#t:t/1">ExParsec.Parser.t(state)</a>, result, [<a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a>]) :: <a href="ExParsec.Reply.html#t:t/2">ExParsec.Reply.t(state, result)</a> when result: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Constructs a successful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>result</code> as the result value. <code>errors</code> can optionally be used to propagate error messages, if any.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/helpers.ex#L46" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+        <div id="macros_details" class="details_list">
+          <h2>Macros</h2>
+          <div class="detail">
+  <div class="detail_header" id="defparser/2">
+    <span class="signature"><strong>defparser(sig, list2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(macro)</span>
+      <a href="#defparser/2" class="detail_link" title="Link to this macro">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <div class="docstring"><p>Defines a parser function. This is a convenience macro that eliminates some very common syntax noise.</p>
+<p>Example:</p>
+<pre><code>defparser return(value) in p do
+    success(p, value)
+end</code></pre>
+<p>The above is equivalent to:</p>
+<pre><code>def return(value) do
+    fn(p) -&gt;
+        success(p, value)
+    end
+end</code></pre>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/helpers.ex#L28" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+    </div>
+  </body>
+</html>

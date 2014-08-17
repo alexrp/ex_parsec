@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExParsec.Base</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Base.html">Base</a></div>
+
+      <h1>
+        ExParsec.Base
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>Provides fundamental combinators and parsers.</p>
+
+        </div>
+      
+
+      
+        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L1" class="view_source">Source</a>
+      
+
+      
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#any_char/0">any_char()</a></td>
+  
+    <td class="summary_synopsis"><p>Parses a codepoint. Returns the codepoint as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#attempt/1">attempt(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Identical to applying <code>parser</code> normally, except that if applying <code>parser</code> results in a fatal error, it will be turned into a regular error</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#between/3">between(parser1, parser2, parser3)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser1</code>, <code>parser2</code>, and <code>parser3</code> in sequence. Returns the result of <code>parser2</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#bind/2">bind(parser, function)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> and passes its result as the only argument to <code>function</code>. <code>function</code> is expected to return a parser. That parser is then applied and its result is returned</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#both/3">both(parser1, parser2, function)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Passes the result values as two arguments to <code>function</code>. <code>function</code>'s return value is returned as the result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#char/1">char(codepoint)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses the given <code>codepoint</code>. On success, returns the codepoint as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#choice/1">choice(parsers)</a></td>
+  
+    <td class="summary_synopsis"><p>Tries to apply each parser in <code>parsers</code> until one succeeds. This is a variant of <a href="#either/2"><code>either/2</code></a> generalized for any number of parsers</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#either/2">either(parser1, parser2)</a></td>
+  
+    <td class="summary_synopsis"><p>First tries to apply <code>parser1</code>. If that fails, tries to apply <code>parser2</code>. If that fails, this combinator fails. Otherwise, returns the first successful result value obtained</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#eof/0">eof()</a></td>
+  
+    <td class="summary_synopsis"><p>Only succeeds at the end of the input data</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#fail/1">fail(message)</a></td>
+  
+    <td class="summary_synopsis"><p>Fails with the given error <code>message</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#fail_fatal/1">fail_fatal(message)</a></td>
+  
+    <td class="summary_synopsis"><p>Fails fatally with the given error <code>message</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#get_position/0">get_position()</a></td>
+  
+    <td class="summary_synopsis"><p>Returns the current position as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#get_state/0">get_state()</a></td>
+  
+    <td class="summary_synopsis"><p>Returns the user state as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#ignore/1">ignore(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> and discards its result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#many/1">many(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> as many times as possible. Returns all results in a list</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#map/2">map(parser, function)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> and passes its result to <code>function</code>. <code>function</code>'s return value is returned as the result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#none_of/1">none_of(codepoints)</a></td>
+  
+    <td class="summary_synopsis"><p>The opposite of <a href="#one_of/1"><code>one_of/1</code></a>: Expects a codepoint that's <em>not</em> in <code>codepoints</code>. Otherwise, works like <a href="#one_of/1"><code>one_of/1</code></a></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#one_of/1">one_of(codepoints)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a codepoint that's present in <code>codepoints</code>, which can either be a list of codepoints, or a string that's converted to a list of codepoints</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#option/1">option(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> if possible. Returns a tuple containing <code>:ok</code> and the result, or <code>nil</code> if <code>parser</code> could not be applied</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pair_both/2">pair_both(parser1, parser2)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Returns the result of both parsers as a tuple</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pair_left/2">pair_left(parser1, parser2)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Returns the result of <code>parser1</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pair_right/2">pair_right(parser1, parser2)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Returns the result of <code>parser2</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pipe/2">pipe(parsers, function)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies each parser in <code>parsers</code>. Passes all result values in a list to <code>function</code>. <code>function</code>'s return value is returned as the result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#return/1">return(value)</a></td>
+  
+    <td class="summary_synopsis"><p>Returns <code>value</code> as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#satisfy/2">satisfy(name, function)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a codepoint that satisfies the criteria required by <code>function</code>. <code>name</code> is used for error message generation</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#sequence/1">sequence(parsers)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies each parser in <code>parsers</code>. Returns all results in a list</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#set_state/1">set_state(state)</a></td>
+  
+    <td class="summary_synopsis"><p>Sets the user state to <code>state</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#skip/1">skip(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> if possible. Discards the result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#skip_many/1">skip_many(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> as many times as possible. Discards the results</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#space/0">space()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a white space character</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#spaces/0">spaces()</a></td>
+  
+    <td class="summary_synopsis"><p>Parses as many white space characters as possible</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#string/1">string(string)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses the given <code>string</code>. On success, returns the string as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#times/2">times(parser, n)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code>parser</code> to the input data <code>n</code> times. Returns results in a list</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#update_state/1">update_state(updater)</a></td>
+  
+    <td class="summary_synopsis"><p>Updates the user state by applying <code>updater</code> to it</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#zero/0">zero()</a></td>
+  
+    <td class="summary_synopsis"><p>Fails without an error message</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <div class="detail_header" id="any_char/0">
+    <span class="signature"><strong>any_char()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#any_char/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>any_char :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses a codepoint. Returns the codepoint as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L380" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="attempt/1">
+    <span class="signature"><strong>attempt(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#attempt/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>attempt(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Identical to applying <code>parser</code> normally, except that if applying <code>parser</code> results in a fatal error, it will be turned into a regular error.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L160" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="between/3">
+    <span class="signature"><strong>between(parser1, parser2, parser3)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#between/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>between(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser1</code>, <code>parser2</code>, and <code>parser3</code> in sequence. Returns the result of <code>parser2</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L294" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="bind/2">
+    <span class="signature"><strong>bind(parser, function)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#bind/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>bind(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result1)</a>, (result1 -> <a href="ExParsec.html#t:t/2">ExParsec.t(state, result2)</a>)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result2)</a> when result1: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> and passes its result as the only argument to <code>function</code>. <code>function</code> is expected to return a parser. That parser is then applied and its result is returned.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L124" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="both/3">
+    <span class="signature"><strong>both(parser1, parser2, function)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#both/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>both(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result1)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, result2)</a>, (result1, result2 -> result3)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result3)</a> when result1: var, result2: var, result3: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Passes the result values as two arguments to <code>function</code>. <code>function</code>'s return value is returned as the result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L252" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="char/1">
+    <span class="signature"><strong>char(codepoint)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#char/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>char(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses the given <code>codepoint</code>. On success, returns the codepoint as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L415" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="choice/1">
+    <span class="signature"><strong>choice(parsers)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#choice/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>choice([<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>, ...]) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Tries to apply each parser in <code>parsers</code> until one succeeds. This is a variant of <a href="#either/2"><code>either/2</code></a> generalized for any number of parsers.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L187" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="either/2">
+    <span class="signature"><strong>either(parser1, parser2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#either/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>either(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>First tries to apply <code>parser1</code>. If that fails, tries to apply <code>parser2</code>. If that fails, this combinator fails. Otherwise, returns the first successful result value obtained.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L177" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="eof/0">
+    <span class="signature"><strong>eof()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#eof/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>eof :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Only succeeds at the end of the input data.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L85" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="fail/1">
+    <span class="signature"><strong>fail(message)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#fail/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>fail(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Fails with the given error <code>message</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L69" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="fail_fatal/1">
+    <span class="signature"><strong>fail_fatal(message)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#fail_fatal/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>fail_fatal(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Fails fatally with the given error <code>message</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L77" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="get_position/0">
+    <span class="signature"><strong>get_position()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#get_position/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>get_position :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="ExParsec.Position.html#t:t/0">ExParsec.Position.t</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Returns the current position as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L43" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="get_state/0">
+    <span class="signature"><strong>get_state()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#get_state/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>get_state :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, term)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Returns the user state as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L19" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="ignore/1">
+    <span class="signature"><strong>ignore(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#ignore/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>ignore(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> and discards its result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L113" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="many/1">
+    <span class="signature"><strong>many(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#many/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>many(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, [result])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> as many times as possible. Returns all results in a list.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L333" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="map/2">
+    <span class="signature"><strong>map(parser, function)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#map/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>map(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result1)</a>, (result1 -> result2)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result2)</a> when result1: var, result2: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> and passes its result to <code>function</code>. <code>function</code>'s return value is returned as the result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L104" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="none_of/1">
+    <span class="signature"><strong>none_of(codepoints)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#none_of/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>none_of([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>] | <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>The opposite of <a href="#one_of/1"><code>one_of/1</code></a>: Expects a codepoint that's <em>not</em> in <code>codepoints</code>. Otherwise, works like <a href="#one_of/1"><code>one_of/1</code></a>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L444" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="one_of/1">
+    <span class="signature"><strong>one_of(codepoints)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#one_of/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>one_of([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>] | <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a codepoint that's present in <code>codepoints</code>, which can either be a list of codepoints, or a string that's converted to a list of codepoints.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L426" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="option/1">
+    <span class="signature"><strong>option(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#option/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>option(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, {:ok, result} | nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> if possible. Returns a tuple containing <code>:ok</code> and the result, or <code>nil</code> if <code>parser</code> could not be applied.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L144" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="pair_both/2">
+    <span class="signature"><strong>pair_both(parser1, parser2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#pair_both/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>pair_both(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result1)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, result2)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, {result1, result2})</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Returns the result of both parsers as a tuple.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L283" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="pair_left/2">
+    <span class="signature"><strong>pair_left(parser1, parser2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#pair_left/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>pair_left(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Returns the result of <code>parser1</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L262" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="pair_right/2">
+    <span class="signature"><strong>pair_right(parser1, parser2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#pair_right/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>pair_right(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser1</code> and <code>parser2</code> in sequence. Returns the result of <code>parser2</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L272" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="pipe/2">
+    <span class="signature"><strong>pipe(parsers, function)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#pipe/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>pipe([<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>], ([term] -> result)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a> when result: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies each parser in <code>parsers</code>. Passes all result values in a list to <code>function</code>. <code>function</code>'s return value is returned as the result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L212" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="return/1">
+    <span class="signature"><strong>return(value)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#return/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>return(value) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, value)</a> when value: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Returns <code>value</code> as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L53" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="satisfy/2">
+    <span class="signature"><strong>satisfy(name, function)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#satisfy/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>satisfy(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, (<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a> -> boolean)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a codepoint that satisfies the criteria required by <code>function</code>. <code>name</code> is used for error message generation.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L394" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="sequence/1">
+    <span class="signature"><strong>sequence(parsers)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#sequence/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>sequence([<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>]) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies each parser in <code>parsers</code>. Returns all results in a list.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L240" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="set_state/1">
+    <span class="signature"><strong>set_state(state)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#set_state/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>set_state(state) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a> when state: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Sets the user state to <code>state</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L27" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="skip/1">
+    <span class="signature"><strong>skip(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#skip/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>skip(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> if possible. Discards the result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L359" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="skip_many/1">
+    <span class="signature"><strong>skip_many(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#skip_many/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>skip_many(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> as many times as possible. Discards the results.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L369" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="space/0">
+    <span class="signature"><strong>space()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#space/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>space :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a white space character.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L460" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="spaces/0">
+    <span class="signature"><strong>spaces()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#spaces/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>spaces :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, [<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses as many white space characters as possible.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L495" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="string/1">
+    <span class="signature"><strong>string(string)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#string/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>string(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses the given <code>string</code>. On success, returns the string as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L469" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="times/2">
+    <span class="signature"><strong>times(parser, n)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#times/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>times(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>, non_neg_integer) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, [result])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code>parser</code> to the input data <code>n</code> times. Returns results in a list.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L303" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="update_state/1">
+    <span class="signature"><strong>update_state(updater)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#update_state/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>update_state((state -> state)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a> when state: var</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Updates the user state by applying <code>updater</code> to it.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L35" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="zero/0">
+    <span class="signature"><strong>zero()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#zero/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>zero :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, nil)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Fails without an error message.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+/lib/ex_parsec/base.ex#L61" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>
