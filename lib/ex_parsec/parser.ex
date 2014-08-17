@@ -35,14 +35,16 @@ defmodule ExParsec.Parser do
     containing `:error` and a reason is returned. Otherwise, returns a tuple
     containing the advanced parser and the codepoint.
 
-    This function is a wrapper on top of `ExParsec.Input.get`, adding position
-    tracking (codepoint index and line/column numbers). Position information
-    can be found on the `position` field of `ExParsec.Parser`.
+    This function is a wrapper on top of `ExParsec.Input.get/1`, adding
+    position tracking (codepoint index and line/column numbers). Position
+    information can be found on the `position` field of `ExParsec.Parser`.
     """
     @spec get(t(state)) :: {t(state), String.codepoint()} | {:error, term()} | :eof
           when [state: var]
     def get(parser) do
         case Input.get(parser.input) do
+            e = {:error, _} -> e
+            :eof -> :eof
             {inp, cp} ->
                 pos = parser.position
                 pos = %Position{pos | :index => pos.index + 1}
@@ -54,7 +56,6 @@ defmodule ExParsec.Parser do
                 end
 
                 {%__MODULE__{input: inp, position: pos}, cp}
-            e -> e
         end
     end
 end
