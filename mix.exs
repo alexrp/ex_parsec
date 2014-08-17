@@ -12,11 +12,13 @@ defmodule ExParsec.Mixfile do
          deps: deps(),
          docs: docs(),
          package: package(),
-         aliases: aliases()]
+         aliases: aliases(),
+         test_coverage: coverage()]
     end
 
     defp deps() do
-        [{:dialyze, "~> 0.1", only: [:dev]},
+        [{:coverex, "~> 0.0.7", only: [:test]},
+         {:dialyze, "~> 0.1", only: [:dev]},
          {:earmark, "~> 0.1.10", only: [:dev]},
          {:ex_doc, "~> 0.5", only: [:dev]},
          {:monad, "~> 1.0.3"}]
@@ -40,5 +42,9 @@ defmodule ExParsec.Mixfile do
     defp aliases() do
         [make: ["deps.get", "deps.compile", "docs"],
          test: "test --trace --cover"]
+    end
+
+    defp coverage() do
+        [tool: Coverex.Task]
     end
 end
