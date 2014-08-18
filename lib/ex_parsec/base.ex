@@ -479,6 +479,16 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses any letter in `?A .. ?Z` or `?a .. ?z`.
+    """
+    @spec letter() :: ExParsec.t(term(), String.codepoint())
+    defparser letter() in p do
+        satisfy("any letter", fn(<<c :: utf8>>) ->
+            cp in ?A .. ?Z || cp in ?a .. ?z
+        end).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
