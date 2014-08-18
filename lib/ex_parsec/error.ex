@@ -26,6 +26,7 @@ defmodule ExParsec.Error do
     """
     @type kind() :: nil |
                     :io |
+                    :expected |
                     :expected_eof |
                     :expected_char |
                     :expected_string

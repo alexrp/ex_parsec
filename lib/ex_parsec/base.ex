@@ -371,6 +371,38 @@ defmodule ExParsec.Base do
         ignore(many(parser)).(p)
     end
 
+    @doc ~S"""
+    Applies `parser`. If it fails, replaces its error with one generated based
+    on `name` of the form `expected #{name}`.
+    """
+    @spec label(ExParsec.t(state, result), String.t()) ::
+          ExParsec.t(state, result) when [state: var, result: var]
+    defparser label(parser, name) in p do
+        r = parser.(p)
+
+        if r.status != :ok do
+            %Reply{r | :errors => error(p, :expected, "expected #{name}")}
+        else
+            r
+        end
+    end
+
+    @doc ~S"""
+    Applies `parser`. If it fails, its errors are propagated in addition to an
+    extra error generated based on `name` of the form `"expected #{name}"`.
+    """
+    @spec describe(ExParsec.t(state, result), String.t()) ::
+          ExParsec.t(state, result) when [state: var, result: var]
+    defparser describe(parser, name) in p do
+        r = parser.(p)
+
+        if r.status != :ok do
+            %Reply{r | :errors => [error(p, :expected, "expected #{name}") | r.errors]}
+        else
+            r
+        end
+    end
+
     # Parsers
 
     @doc """
