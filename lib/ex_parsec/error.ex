@@ -26,6 +26,7 @@ defmodule ExParsec.Error do
     The various error kinds.
     """
     @type kind() :: nil |
+                    :eof |
                     :io |
                     :expected |
                     :expected_eof |
