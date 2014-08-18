@@ -380,7 +380,7 @@ defmodule ExParsec.Base do
     defparser any_char() in p do
         case Parser.get(p) do
             {:error, r} -> failure([error(p, "encountered I/O error: #{inspect(r)}")])
-            :eof -> failure([error(p, "expected any character but encountered end of file")])
+            :eof -> failure([error(p, "expected a character but encountered end of file")])
             {p, cp} -> success(p, cp)
         end
     end
