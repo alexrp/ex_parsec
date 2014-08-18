@@ -16,6 +16,10 @@ defmodule ExParsec.Mixfile do
          test_coverage: coverage()]
     end
 
+    def application() do
+        [applications: [:monad]]
+    end
+
     defp deps() do
         [{:coverex, "~> 0.0.7", only: [:test]},
          {:dialyze, "~> 0.1.2", only: [:dev]},
