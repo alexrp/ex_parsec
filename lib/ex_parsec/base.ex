@@ -512,21 +512,25 @@ defmodule ExParsec.Base do
     """
     @spec string(String.t()) :: ExParsec.t(term(), String.t())
     defparser string(string) in p do
-        loop = fn(loop, p, str) ->
-            case String.next_codepoint(str) do
-                {cp, str} ->
-                    r = char(cp).(p)
+        sz = length(String.codepoints((string)))
+
+        loop = fn(loop, accp, acc) ->
+            cond do
+                acc == string -> success(accp, acc)
+                length(String.codepoints(acc)) >= sz ->
+                    failure([error(p, "expected #{inspect(string)} but found #{inspect(acc)}")])
+                true ->
+                    r = any_char().(accp)
 
                     if r.status == :ok do
-                        loop.(loop, r.parser, str)
+                        loop.(loop, r.parser, acc <> r.result)
                     else
                         r
                     end
-                nil -> success(p, string)
             end
         end
 
-        loop.(loop, p, string)
+        loop.(loop, p, "")
     end
 
     @doc """
