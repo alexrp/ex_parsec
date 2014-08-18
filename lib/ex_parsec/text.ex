@@ -1,6 +1,8 @@
 defmodule ExParsec.Text do
     @moduledoc """
     Provides common parsers that operate on text.
+
+    These parsers all require that the input data is codepoints.
     """
 
     import ExParsec.Base
