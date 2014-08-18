@@ -499,7 +499,7 @@ defmodule ExParsec.Base do
     end
 
     @doc """
-    Expects and parses any letter in `?A .. ?Z` or `?a .. ?z`.
+    Expects and parses any letter in `?A .. ?Z` and `?a .. ?z`.
     """
     @spec letter() :: ExParsec.t(term(), String.codepoint())
     defparser letter() in p do
