@@ -88,7 +88,7 @@ defmodule ExParsec.Base do
         if Input.get(p.input) == :eof do
             success(p, nil)
         else
-            failure([error(p, "expected end of file")])
+            failure([error(p, :expected_eof, "expected end of file")])
         end
     end
 
@@ -379,8 +379,8 @@ defmodule ExParsec.Base do
     @spec any_char() :: ExParsec.t(term(), String.codepoint())
     defparser any_char() in p do
         case Parser.get(p) do
-            {:error, r} -> failure([error(p, "encountered I/O error: #{inspect(r)}")])
-            :eof -> failure([error(p, "expected a character but encountered end of file")])
+            {:error, r} -> failure([error(p, :io, "encountered I/O error: #{inspect(r)}")])
+            :eof -> failure([error(p, :expected_char, "expected a character but encountered end of file")])
             {p, cp} -> success(p, cp)
         end
     end
@@ -400,7 +400,7 @@ defmodule ExParsec.Base do
             if function.(cp) do
                 r
             else
-                failure([error(p, "expected #{name} but found #{inspect(cp)}")])
+                failure([error(p, :expected_char, "expected #{name} but found #{inspect(cp)}")])
             end
         else
             r

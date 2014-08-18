@@ -3,19 +3,32 @@ defmodule ExParsec.Error do
     Represents a parse error encountered when executing a parser function.
 
     * `message` is the error message.
+    * `kind` is the error kind. `nil` if the error doesn't fit into the list
+      of standard error kinds.
     * `position` is the position in the input data where the error occurred.
     """
 
     alias ExParsec.Position
 
     defstruct message: nil,
+              kind: nil,
               position: nil
 
     @typedoc """
     The type of an `ExParsec.Error` instance.
     """
     @type t() :: %__MODULE__{message: String.t(),
+                             kind: kind(),
                              position: Position.t()}
+
+    @typedoc """
+    The various error kinds.
+    """
+    @type kind() :: nil |
+                    :io |
+                    :expected_eof |
+                    :expected_char |
+                    :expected_string
 
     @doc """
     Checks if `value` is an `ExParsec.Error` instance.

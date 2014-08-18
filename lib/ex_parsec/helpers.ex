@@ -112,8 +112,7 @@ defmodule ExParsec.Helpers do
     Constructs an unsuccessful `ExParsec.Reply` with `status` (either `:error`
     or `:fatal`) as the error kind and `errors` as the list of errors.
     """
-    @spec failure(:error | :fatal, [Error.t()]) ::
-          Reply.t(term(), nil) when [state: var, result: var]
+    @spec failure(:error | :fatal, [Error.t()]) :: Reply.t(term(), nil)
     def failure(status \\ :error, errors) do
         %Reply{status: status,
                errors: errors}
@@ -123,9 +122,10 @@ defmodule ExParsec.Helpers do
     Constructs an `ExParsec.Error` with the given `message` and the current
     position from `parser`.
     """
-    @spec error(Parser.t(term()), String.t()) :: Error.t() when [state: var]
-    def error(parser, message) do
+    @spec error(Parser.t(term()), Error.kind(), String.t()) :: Error.t()
+    def error(parser, kind \\ nil, message) do
         %Error{message: message,
+               kind: kind,
                position: parser.position}
     end
 end
