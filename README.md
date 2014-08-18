@@ -18,7 +18,7 @@ After you are done, run `mix deps.get` in your shell to fetch and compile
 ExParsec. Start an interactive Elixir shell with `iex -S mix`.
 
 ```iex
-iex> import ExParsec.Base
+iex> import ExParsec.Base; import ExParsec.Text
 nil
 iex> ExParsec.parse_value "foo", many(any_char())
 {:ok, nil, ["f", "o", "o"]}
