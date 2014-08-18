@@ -24,8 +24,9 @@ end
 defimpl ExParsec.Input, for: ExParsec.Input.FileInput do
     alias ExParsec.Input.FileInput
 
-    @spec get(FileInput.t()) :: {FileInput.t(), String.codepoint()} | {:error, term()} | :eof
-    def get(input) do
+    @spec get(FileInput.t(), Keyword.t()) :: {FileInput.t(), String.codepoint()} |
+                                             {:error, term()} | :eof
+    def get(input, _) do
         case IO.read(input.device, 1) do
             {:error, r} -> {:error, r}
             :eof -> :eof

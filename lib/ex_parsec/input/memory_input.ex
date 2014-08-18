@@ -25,8 +25,9 @@ end
 defimpl ExParsec.Input, for: ExParsec.Input.MemoryInput do
     alias ExParsec.Input.MemoryInput
 
-    @spec get(MemoryInput.t()) :: {MemoryInput.t(), term()} | {:error, term()} | :eof
-    def get(input) do
+    @spec get(MemoryInput.t(), Keyword.t()) :: {MemoryInput.t(), term()} |
+                                               {:error, term()} | :eof
+    def get(input, _) do
         if is_list(input.value) do
             case input.value do
                 [h | t] -> {%MemoryInput{value: t}, h}

@@ -22,6 +22,7 @@ defmodule ExParsec do
     """
 
     alias ExParsec.Error
+    alias ExParsec.Input.BinaryInput
     alias ExParsec.Input.FileInput
     alias ExParsec.Input.MemoryInput
     alias ExParsec.Input
@@ -78,6 +79,17 @@ defmodule ExParsec do
                  Enum.uniq() |>
                  Enum.sort(&(&1.message < &2.message))}
         end
+    end
+
+    @doc """
+    Constructs an `ExParsec.Input.BinaryInput` instance with the given `value`
+    and forwards to `parse/3`.
+    """
+    @spec parse_binary(bitstring(), t(state, result), state) ::
+          {:ok, state, result} | {:error, [Error.t()]}
+          when [state: var, result: var]
+    def parse_binary(value, function, state \\ nil) do
+        parse(%BinaryInput{value: value}, function, state)
     end
 
     @doc """

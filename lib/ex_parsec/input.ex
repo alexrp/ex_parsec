@@ -16,7 +16,9 @@ defprotocol ExParsec.Input do
     returned. If invalid input data is encountered, a tuple containing `:error`
     and a reason is returned. Otherwise, returns a tuple containing the
     advanced input and the fetched data.
+
+    `opts` can be used for implementation-specific options.
     """
     @spec get(t()) :: {t(), term()} | {:error, term()} | :eof
-    def get(input)
+    def get(input, opts \\ [])
 end

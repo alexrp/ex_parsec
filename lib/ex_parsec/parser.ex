@@ -37,15 +37,17 @@ defmodule ExParsec.Parser do
     and a reason is returned. Otherwise, returns a tuple containing the
     advanced parser and the fetched data.
 
-    This function is a wrapper on top of `ExParsec.Input.get/1`, adding
+    `opts` is passed through to `ExParsec.Input.get/2`.
+
+    This function is a wrapper on top of `ExParsec.Input.get/2`, adding
     position tracking (codepoint index and line/column numbers) for input data
     that supports it. Position information can be found on the `position` field
     of `ExParsec.Parser`.
     """
-    @spec get(t(state)) :: {t(state), String.codepoint() | Token.t()} |
-                           {:error, term()} | :eof when [state: var]
-    def get(parser) do
-        case Input.get(parser.input) do
+    @spec get(t(state), Keyword.t()) :: {t(state), String.codepoint() | Token.t()} |
+                                        {:error, term()} | :eof when [state: var]
+    def get(parser, opts \\ []) do
+        case Input.get(parser.input, opts) do
             e = {:error, _} -> e
             :eof -> :eof
             {inp, data} ->
