@@ -462,6 +462,14 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses a tab (`"\t"`) character.
+    """
+    @spec tab() :: ExParsec.t(term(), String.codepoint())
+    defparser tab() in p do
+        satisfy(inspect("\t"), fn(c) -> c == "\t" end).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
