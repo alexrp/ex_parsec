@@ -479,13 +479,31 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses any letter in `?a .. ?z`.
+    """
+    @spec lower() :: ExParsec.t(term(), String.codepoint())
+    defparser lower() in p do
+        satisfy("any lower case letter", fn(<<c :: utf8>>) ->
+            c in ?a .. ?z
+        end).(p)
+    end
+
+    @doc """
+    Expects and parses any letter in `?A .. ?Z`.
+    """
+    @spec upper() :: ExParsec.t(term(), String.codepoint())
+    defparser upper() in p do
+        satisfy("any upper case letter", fn(<<c :: utf8>>) ->
+            c in ?A .. ?Z
+        end).(p)
+    end
+
+    @doc """
     Expects and parses any letter in `?A .. ?Z` or `?a .. ?z`.
     """
     @spec letter() :: ExParsec.t(term(), String.codepoint())
     defparser letter() in p do
-        satisfy("any letter", fn(<<c :: utf8>>) ->
-            cp in ?A .. ?Z || cp in ?a .. ?z
-        end).(p)
+        either(lower(), upper()).(p)
     end
 
     @doc """
