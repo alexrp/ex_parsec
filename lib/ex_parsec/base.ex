@@ -454,11 +454,11 @@ defmodule ExParsec.Base do
     end
 
     @doc """
-    Expects and parses a white space character.
+    Expects and parses any white space character.
     """
     @spec space() :: ExParsec.t(term(), String.codepoint())
     defparser space() in p do
-        satisfy("white space character", fn(c) -> String.strip(c) == "" end).(p)
+        satisfy("any white space character", fn(c) -> String.strip(c) == "" end).(p)
     end
 
     @doc """
