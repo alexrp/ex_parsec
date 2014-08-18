@@ -6,6 +6,7 @@ defmodule ExParsec.Error do
     * `kind` is the error kind. `nil` if the error doesn't fit into the list
       of standard error kinds.
     * `position` is the position in the input data where the error occurred.
+      Can be `nil` if the input doesn't support position tracking.
     """
 
     alias ExParsec.Position
@@ -19,7 +20,7 @@ defmodule ExParsec.Error do
     """
     @type t() :: %__MODULE__{message: String.t(),
                              kind: kind(),
-                             position: Position.t()}
+                             position: Position.t() | nil}
 
     @typedoc """
     The various error kinds.
