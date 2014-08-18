@@ -9,7 +9,6 @@ defmodule ExParsec do
     * `ExParsec`
     * `ExParsec.Base`
     * `ExParsec.Helpers`
-    * `ExParsec.Text`
 
     It will also `alias` the following modules:
 
@@ -30,12 +29,15 @@ defmodule ExParsec do
     alias ExParsec.Reply
 
     @doc false
-    defmacro __using__(_) do
+    defmacro __using__(opts) do
+        mod = Module.concat(ExParsec, Macro.expand(opts[:mode], __ENV__) || Text)
+
         quote do
             import ExParsec
             import ExParsec.Base
             import ExParsec.Helpers
-            import ExParsec.Text
+
+            import unquote(mod)
 
             alias ExParsec.Error
             alias ExParsec.Input
