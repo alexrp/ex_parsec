@@ -470,6 +470,15 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses a newline sequence. This can either be a `"\n"` or a
+    `"\r"` followed by `"\n"`. Either way, returns `"\n"` as result.
+    """
+    @spec newline() :: ExParsec.t(term(), String.codepoint())
+    defparser newline() in p do
+        bind(option(char("\r")), fn(_) -> char("\n") end).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
