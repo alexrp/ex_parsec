@@ -10,6 +10,7 @@ defmodule ExParsec.Parser do
 
     alias ExParsec.Input
     alias ExParsec.Position
+    alias ExParsec.Token
 
     defstruct input: nil,
               position: nil,
