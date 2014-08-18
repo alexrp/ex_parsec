@@ -507,6 +507,46 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses any digit in `?0 .. ?1`.
+    """
+    @spec bin_digit() :: ExParsec.t(term(), String.codepoint())
+    defparser bin_digit() in p do
+        satisfy("any binary digit", fn(<<c :: utf8>>) ->
+            c in ?0 .. ?1
+        end).(p)
+    end
+
+    @doc """
+    Expects and parses any digit in `?0 .. ?7`.
+    """
+    @spec oct_digit() :: ExParsec.t(term(), String.codepoint())
+    defparser oct_digit() in p do
+        satisfy("any octal digit", fn(<<c :: utf8>>) ->
+            c in ?0 .. ?7
+        end).(p)
+    end
+
+    @doc """
+    Expects and parses any digit in `?0 .. ?9`.
+    """
+    @spec digit() :: ExParsec.t(term(), String.codepoint())
+    defparser digit() in p do
+        satisfy("any decimal digit", fn(<<c :: utf8>>) ->
+            c in ?0 .. ?9
+        end).(p)
+    end
+
+    @doc """
+    Expects and parses any digit in `?0 .. ?9`, `?A .. ?F`, and `?a .. ?f`.
+    """
+    @spec hex_digit() :: ExParsec.t(term(), String.codepoint())
+    defparser hex_digit() in p do
+        satisfy("any hexadecimal digit", fn(<<c :: utf8>>) ->
+            c in ?0 .. ?9 || c in ?A .. ?F || c in ?a .. ?f
+        end).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
