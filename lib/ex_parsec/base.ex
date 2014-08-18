@@ -547,6 +547,14 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Expects and parses any alphanumeric character (i.e. `?A .. ?Z`, `?a .. ?z`,
+    and `?0 .. ?9`).
+    """
+    defparser alphanumeric() in p do
+        either(letter(), digit()).(p)
+    end
+
+    @doc """
     Expects and parses the given `string`. On success, returns the string as
     result.
     """
