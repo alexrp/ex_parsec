@@ -79,14 +79,14 @@ defmodule ExParsec do
     end
 
     @doc """
-    Constructs an `ExParsec.Input.MemoryInput` instance with the given `string`
+    Constructs an `ExParsec.Input.MemoryInput` instance with the given `value`
     and forwards to `parse/3`.
     """
-    @spec parse_string(String.t(), t(state, result), state) ::
+    @spec parse_value(String.t() | [term()], t(state, result), state) ::
           {:ok, state, result} | {:error, [Error.t()]}
           when [state: var, result: var]
-    def parse_string(string, function, state \\ nil) do
-        parse(%MemoryInput{value: string}, function, state)
+    def parse_value(value, function, state \\ nil) do
+        parse(%MemoryInput{value: value}, function, state)
     end
 
     @doc """

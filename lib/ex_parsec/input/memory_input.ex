@@ -1,18 +1,17 @@
 defmodule ExParsec.Input.MemoryInput do
     @moduledoc """
-    Provides data from an in-memory UTF-8 string or a list of tokens.
+    Provides data from an in-memory UTF-8 string, a list of tokens, or a list
+    of any arbitrary term type.
 
-    * `value` is the binary containing the encoded string or a list of tokens.
+    * `value` is the binary containing the encoded string or list of terms.
     """
-
-    alias ExParsec.Token
 
     defstruct value: nil
 
     @typedoc """
     The type of an `ExParsec.Input.MemoryInput` instance.
     """
-    @type t() :: %__MODULE__{value: String.t() | [Token.t()]}
+    @type t() :: %__MODULE__{value: String.t() | [term()]}
 
     @doc """
     Checks if `value` is an `ExParsec.Input.MemoryInput` instance.
@@ -25,10 +24,8 @@ end
 
 defimpl ExParsec.Input, for: ExParsec.Input.MemoryInput do
     alias ExParsec.Input.MemoryInput
-    alias ExParsec.Token
 
-    @spec get(MemoryInput.t()) :: {MemoryInput.t(), String.codepoint() | Token.t()} |
-                                  {:error, term()} | :eof
+    @spec get(MemoryInput.t()) :: {MemoryInput.t(), term()} | {:error, term()} | :eof
     def get(input) do
         if is_list(input.value) do
             case input.value do

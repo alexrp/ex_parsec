@@ -20,17 +20,17 @@ ExParsec. Start an interactive Elixir shell with `iex -S mix`.
 ```iex
 iex> import ExParsec.Base
 nil
-iex> ExParsec.parse_string "foo", many(any_char())
+iex> ExParsec.parse_value "foo", many(any_char())
 {:ok, nil, ["f", "o", "o"]}
-iex> ExParsec.parse_string "[x]", between(char("["), char("x"), char("]"))
+iex> ExParsec.parse_value "[x]", between(char("["), char("x"), char("]"))
 {:ok, nil, "x"}
-iex> ExParsec.parse_string "  spa ces  ",
-                           sequence([skip(spaces),
-                                     times(any_char(), 3),
-                                     skip(space),
-                                     times(any_char(), 3),
-                                     skip(spaces),
-                                     eof])
+iex> ExParsec.parse_value "  spa ces  ",
+                          sequence([skip(spaces),
+                                    times(any_char(), 3),
+                                    skip(space),
+                                    times(any_char(), 3),
+                                    skip(spaces),
+                                    eof])
 {:ok, nil, [nil, ["s", "p", "a"], nil, ["c", "e", "s"], nil, nil]}
 ```
 
