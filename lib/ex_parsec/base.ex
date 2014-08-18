@@ -380,7 +380,7 @@ defmodule ExParsec.Base do
     defparser any_char() in p do
         case Parser.get(p) do
             {:error, r} -> failure([error(p, :io, "encountered I/O error: #{inspect(r)}")])
-            :eof -> failure([error(p, :expected_char, "expected a character but encountered end of file")])
+            :eof -> failure([error(p, :eof, "expected a character but encountered end of file")])
             {p, cp} -> success(p, cp)
         end
     end
@@ -512,16 +512,19 @@ defmodule ExParsec.Base do
     """
     @spec string(String.t()) :: ExParsec.t(term(), String.t())
     defparser string(string) in p do
-        sz = byte_size(string)
+        sz = length(String.codepoints(string))
 
         loop = fn(loop, accp, acc) ->
             cond do
                 acc == string -> success(accp, acc)
-                byte_size(acc) >= sz -> failure([error(p, "expected #{inspect(string)} but found #{inspect(acc)}")])
+                length(String.codepoints(acc)) >= sz ->
+                    failure([error(p, :expected_string, "expected #{inspect(string)} but found #{inspect(acc)}")])
                 true ->
                     case Parser.get(accp) do
-                        {:error, r} -> failure([error(accp, "Encountered I/O error: #{inspect(r)}")])
-                        :eof -> failure([error(accp, "expected #{inspect(string)} but encountered end of file")])
+                        {:error, r} ->
+                            failure([error(accp, :io, "Encountered I/O error: #{inspect(r)}")])
+                        :eof ->
+                            failure([error(accp, :eof, "expected #{inspect(string)} but encountered end of file")])
                         {accp, cp} -> loop.(loop, accp, acc <> cp)
                     end
             end
