@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExParsec.Text</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Text.html">Text</a></div>
+
+      <h1>
+        ExParsec.Text
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>Provides common parsers that operate on text.</p>
+<p>These parsers all require that the input data is codepoints.</p>
+
+        </div>
+      
+
+      
+        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L1" class="view_source">Source</a>
+      
+
+      
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#alphanumeric/0">alphanumeric()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any alphanumeric character (i.e. <code class="inline">?A .. ?Z</code>, <code class="inline">?a .. ?z</code>,
+and <code class="inline">?0 .. ?9</code>)</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#any_char/0">any_char()</a></td>
+  
+    <td class="summary_synopsis"><p>Parses a codepoint. Returns the codepoint as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#bin_digit/0">bin_digit()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any digit in <code class="inline">?0 .. ?1</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#char/1">char(codepoint)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses the given <code class="inline">codepoint</code>. On success, returns the codepoint
+as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#digit/0">digit()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any digit in <code class="inline">?0 .. ?9</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#hex_digit/0">hex_digit()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any digit in <code class="inline">?0 .. ?9</code>, <code class="inline">?A .. ?F</code>, and <code class="inline">?a .. ?f</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#letter/0">letter()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any letter in <code class="inline">?A .. ?Z</code> and <code class="inline">?a .. ?z</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#lower/0">lower()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any letter in <code class="inline">?a .. ?z</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#newline/0">newline()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a newline sequence. This can either be a `”
+“` or a
+`”
+“<code class="inline">followed by</code>“
+“<code class="inline">. Either way, returns</code>“
+“` as result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#none_of/1">none_of(codepoints)</a></td>
+  
+    <td class="summary_synopsis"><p>The opposite of <a href="#one_of/1"><code class="inline">one_of/1</code></a>: Expects a codepoint that’s <em>not</em> in
+<code class="inline">codepoints</code>. Otherwise, works like <a href="#one_of/1"><code class="inline">one_of/1</code></a></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#oct_digit/0">oct_digit()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any digit in <code class="inline">?0 .. ?7</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#one_of/1">one_of(codepoints)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a codepoint that’s present in <code class="inline">codepoints</code>, which can
+either be a list of codepoints, or a string that’s converted to a list of
+codepoints</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#satisfy/2">satisfy(name, function)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a codepoint that satisfies the criteria required by
+<code class="inline">function</code>. <code class="inline">name</code> is used for error message generation</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#space/0">space()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any white space character</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#spaces/0">spaces()</a></td>
+  
+    <td class="summary_synopsis"><p>Parses as many white space characters as possible</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#string/1">string(string)</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses the given <code class="inline">string</code>. On success, returns the string as
+result</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#tab/0">tab()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses a tab (<code class="inline">&quot;    &quot;</code>) character</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#upper/0">upper()</a></td>
+  
+    <td class="summary_synopsis"><p>Expects and parses any letter in <code class="inline">?A .. ?Z</code></p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <div class="detail_header" id="alphanumeric/0">
+    <span class="signature"><strong>alphanumeric()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#alphanumeric/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <div class="docstring"><p>Expects and parses any alphanumeric character (i.e. <code class="inline">?A .. ?Z</code>, <code class="inline">?a .. ?z</code>,
+and <code class="inline">?0 .. ?9</code>).</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L190" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="any_char/0">
+    <span class="signature"><strong>any_char()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#any_char/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>any_char :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses a codepoint. Returns the codepoint as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L17" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="bin_digit/0">
+    <span class="signature"><strong>bin_digit()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#bin_digit/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>bin_digit :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any digit in <code class="inline">?0 .. ?1</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L150" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="char/1">
+    <span class="signature"><strong>char(codepoint)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#char/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>char(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses the given <code class="inline">codepoint</code>. On success, returns the codepoint
+as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L52" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="digit/0">
+    <span class="signature"><strong>digit()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#digit/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>digit :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any digit in <code class="inline">?0 .. ?9</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L170" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="hex_digit/0">
+    <span class="signature"><strong>hex_digit()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#hex_digit/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>hex_digit :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any digit in <code class="inline">?0 .. ?9</code>, <code class="inline">?A .. ?F</code>, and <code class="inline">?a .. ?f</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L180" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="letter/0">
+    <span class="signature"><strong>letter()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#letter/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>letter :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any letter in <code class="inline">?A .. ?Z</code> and <code class="inline">?a .. ?z</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L142" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="lower/0">
+    <span class="signature"><strong>lower()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#lower/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>lower :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any letter in <code class="inline">?a .. ?z</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L122" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="newline/0">
+    <span class="signature"><strong>newline()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#newline/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>newline :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a newline sequence. This can either be a `”
+“` or a
+`”
+“<code class="inline">followed by</code>“
+“<code class="inline">. Either way, returns</code>“
+“` as result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L114" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="none_of/1">
+    <span class="signature"><strong>none_of(codepoints)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#none_of/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>none_of([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>] | <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>The opposite of <a href="#one_of/1"><code class="inline">one_of/1</code></a>: Expects a codepoint that’s <em>not</em> in
+<code class="inline">codepoints</code>. Otherwise, works like <a href="#one_of/1"><code class="inline">one_of/1</code></a>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L81" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="oct_digit/0">
+    <span class="signature"><strong>oct_digit()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#oct_digit/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>oct_digit :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any digit in <code class="inline">?0 .. ?7</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L160" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="one_of/1">
+    <span class="signature"><strong>one_of(codepoints)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#one_of/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>one_of([<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>] | <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a codepoint that’s present in <code class="inline">codepoints</code>, which can
+either be a list of codepoints, or a string that’s converted to a list of
+codepoints.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L63" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="satisfy/2">
+    <span class="signature"><strong>satisfy(name, function)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#satisfy/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>satisfy(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, (<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a> -> boolean)) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a codepoint that satisfies the criteria required by
+<code class="inline">function</code>. <code class="inline">name</code> is used for error message generation.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L31" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="space/0">
+    <span class="signature"><strong>space()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#space/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>space :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any white space character.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L97" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="spaces/0">
+    <span class="signature"><strong>spaces()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#spaces/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>spaces :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, [<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses as many white space characters as possible.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L225" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="string/1">
+    <span class="signature"><strong>string(string)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#string/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>string(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses the given <code class="inline">string</code>. On success, returns the string as
+result.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L199" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="tab/0">
+    <span class="signature"><strong>tab()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#tab/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>tab :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses a tab (<code class="inline">&quot;    &quot;</code>) character.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L105" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="upper/0">
+    <span class="signature"><strong>upper()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#upper/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>upper :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a>)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Expects and parses any letter in <code class="inline">?A .. ?Z</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/text.ex#L132" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>

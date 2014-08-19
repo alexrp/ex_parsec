@@ -20,40 +20,50 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="readme.html">README</a></div>
-      <h1 id="exparsec">ExParsec</h1>
-<p><a href="https://travis-ci.org/alexrp/ex_parsec"><embed src="https://travis-ci.org/alexrp/ex_parsec.png?branch=master"></a></p>
+      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="readme.html">README</a></div>
+      <h1>ExParsec</h1>
+<p><a href="https://travis-ci.org/alexrp/ex_parsec"><img src="https://travis-ci.org/alexrp/ex_parsec.png?branch=master" alt="Build Status"/></a></p>
 <p>A parser combinator library inspired by Parsec.</p>
-<h2 id="usage">Usage</h2>
-<p>Add ExParsec as a dependency in your <code>mix.exs</code> file:</p>
-<pre class="elixir"><code>def deps do
-  [ {:ex_parsec, &quot;~&gt; 0.0.0&quot;} ]
+<h2>Usage</h2>
+<p>Add ExParsec as a dependency in your <code class="inline">mix.exs</code> file:</p>
+<pre><code class="elixir">def deps do
+  [ {:ex_parsec, &quot;~&gt; x.y.z&quot;} ]
 end</code></pre>
-<p>After you are done, run <code>mix deps.get</code> in your shell to fetch and compile ExParsec. Start an interactive Elixir shell with <code>iex -S mix</code>.</p>
-<pre class="iex"><code>iex&gt; import ExParsec.Base
+<p>Replace <code class="inline">x.y.z</code> with whatever released version you would like to depend on.</p>
+<p>After you are done, run <code class="inline">mix deps.get</code> in your shell to fetch and compile
+ExParsec. Start an interactive Elixir shell with <code class="inline">iex -S mix</code>.</p>
+<pre><code class="iex">iex&gt; import ExParsec.Base; import ExParsec.Text
 nil
-iex&gt; ExParsec.parse_string &quot;foo&quot;, many(any_char())
+iex&gt; ExParsec.parse_value &quot;foo&quot;, many(any_char())
 {:ok, nil, [&quot;f&quot;, &quot;o&quot;, &quot;o&quot;]}
-iex&gt; ExParsec.parse_string &quot;[x]&quot;, between(char(&quot;[&quot;), char(&quot;x&quot;), char(&quot;]&quot;))
+iex&gt; ExParsec.parse_value &quot;[x]&quot;, between(char(&quot;[&quot;), char(&quot;x&quot;), char(&quot;]&quot;))
 {:ok, nil, &quot;x&quot;}
-iex&gt; ExParsec.parse_string &quot;  spa ces  &quot;,
-                           sequence([skip_many(space),
-                                     times(any_char(), 3),
-                                     skip(space),
-                                     times(any_char(), 3),
-                                     skip_many(space),
-                                     eof])
+iex&gt; ExParsec.parse_value &quot;  spa ces  &quot;,
+                          sequence([skip(spaces),
+                                    times(any_char(), 3),
+                                    skip(space),
+                                    times(any_char(), 3),
+                                    skip(spaces),
+                                    eof])
 {:ok, nil, [nil, [&quot;s&quot;, &quot;p&quot;, &quot;a&quot;], nil, [&quot;c&quot;, &quot;e&quot;, &quot;s&quot;], nil, nil]}</code></pre>
-<h2 id="features">Features</h2>
+<h2>Features</h2>
 <ul>
-<li>Can parse context-sensitive grammars.</li>
-<li>High-quality error messages readable by humans.</li>
-<li>Full UTF-8 string support.</li>
-<li>Non-text input can be parsed (e.g. tokens).</li>
-<li>Support for theoretically infinitely large files.</li>
-<li>Simple, extensible API surface.</li>
+<li>Can parse context-sensitive grammars.
+</li>
+<li>High-quality, customizable error messages.
+</li>
+<li>Full UTF-8 string support.
+</li>
+<li>Non-text input such as binary data and tokens.
+</li>
+<li>Support for theoretically infinitely large files.
+</li>
+<li>Monadic parse blocks based on Elixir macros.
+</li>
+<li>Simple, extensible API surface.
+</li>
 </ul>
-<h2 id="examples">Examples</h2>
+<h2>Examples</h2>
 
     </div>
   </body>

@@ -20,7 +20,7 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Error.html">Error</a></div>
+      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Error.html">Error</a></div>
 
       <h1>
         ExParsec.Error
@@ -45,15 +45,21 @@
         <div id="moduledoc" class="docstring">
           <p>Represents a parse error encountered when executing a parser function.</p>
 <ul>
-<li><code>message</code> is the error message.</li>
-<li><code>position</code> is the position in the input data where the error occurred.</li>
+<li><code class="inline">message</code> is the error message.
+</li>
+<li><code class="inline">kind</code> is the error kind. <code class="inline">nil</code> if the error doesn’t fit into the list
+  of standard error kinds.
+</li>
+<li><code class="inline">position</code> is the position in the input data where the error occurred.
+  Can be <code class="inline">nil</code> if the input doesn’t support position tracking.
+</li>
 </ul>
 
         </div>
       
 
       
-        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
 /lib/ex_parsec/error.ex#L1" class="view_source">Source</a>
       
 
@@ -63,7 +69,7 @@
           <tr>
   <td class="summary_signature"><a href="#error?/1">error?(value)</a></td>
   
-    <td class="summary_synopsis"><p>Checks if <code>value</code> is an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> instance</p>
+    <td class="summary_synopsis"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Error.html"><code class="inline">ExParsec.Error</code></a> instance</p>
 </td>
   
 </tr>
@@ -76,10 +82,19 @@
           <h2>Types <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></h2>
           <div class="type_detail">
   <p class="typespec" id="t:t/0">
-    <a href="#t:t/0">t</a> :: %ExParsec.Error{message: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, position: <a href="ExParsec.Position.html#t:t/0">ExParsec.Position.t</a>}
+    <a href="#t:t/0">t</a> :: %ExParsec.Error{message: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, kind: <a href="#t:kind/0">kind</a>, position: <a href="ExParsec.Position.html#t:t/0">ExParsec.Position.t</a> | nil}
   </p>
   
-      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> instance.</p>
+      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Error.html"><code class="inline">ExParsec.Error</code></a> instance.</p>
+</div>
+  
+</div>
+<div class="type_detail">
+  <p class="typespec" id="t:kind/0">
+    <a href="#t:kind/0">kind</a> :: nil | :eof | :io | :expected | :expected_eof | :expected_char | :expected_string
+  </p>
+  
+      <div class="typespec_doc"><p>The various error kinds.</p>
 </div>
   
 </div>
@@ -107,11 +122,11 @@
       
     </ul>
   
-  <div class="docstring"><p>Checks if <code>value</code> is an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> instance.</p>
+  <div class="docstring"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Error.html"><code class="inline">ExParsec.Error</code></a> instance.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/error.ex#L24" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/error.ex#L40" class="view_source">Source</a>
   
 </div>
 

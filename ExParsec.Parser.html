@@ -20,7 +20,7 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Parser.html">Parser</a></div>
+      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Parser.html">Parser</a></div>
 
       <h1>
         ExParsec.Parser
@@ -45,16 +45,20 @@
         <div id="moduledoc" class="docstring">
           <p>Represents the state of an executing parse session.</p>
 <ul>
-<li><code>input</code> is the input data.</li>
-<li><code>position</code> is the current position in the input data.</li>
-<li><code>state</code> is the current user state.</li>
+<li><code class="inline">input</code> is the input data.
+</li>
+<li><code class="inline">position</code> is the current position in the input data. This is <code class="inline">nil</code> if
+  the input data does not support text position tracking.
+</li>
+<li><code class="inline">state</code> is the current user state.
+</li>
 </ul>
 
         </div>
       
 
       
-        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
 /lib/ex_parsec/parser.ex#L1" class="view_source">Source</a>
       
 
@@ -62,16 +66,19 @@
         <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#get/1">get(parser)</a></td>
+  <td class="summary_signature"><a href="#get/2">get(parser, opts \\ [])</a></td>
   
-    <td class="summary_synopsis"><p>Fetches a codepoint or token from the input. If no more data is available, <code>:eof</code> is returned. If an invalid codepoint or token is encountered, a tuple containing <code>:error</code> and a reason is returned. Otherwise, returns a tuple containing the advanced parser and the codepoint/token</p>
+    <td class="summary_synopsis"><p>Fetches data from the input. If no more data is available, <code class="inline">:eof</code> is
+returned. If invalid input data is encountered, a tuple containing <code class="inline">:error</code>
+and a reason is returned. Otherwise, returns a tuple containing the
+advanced parser and the fetched data</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#parser?/1">parser?(value)</a></td>
   
-    <td class="summary_synopsis"><p>Checks if <code>value</code> is an <a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a> instance</p>
+    <td class="summary_synopsis"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Parser.html"><code class="inline">ExParsec.Parser</code></a> instance</p>
 </td>
   
 </tr>
@@ -84,10 +91,10 @@
           <h2>Types <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></h2>
           <div class="type_detail">
   <p class="typespec" id="t:t/1">
-    <a href="#t:t/1">t(state)</a> :: %ExParsec.Parser{input: <a href="ExParsec.Input.html#t:t/0">ExParsec.Input.t</a>, position: <a href="ExParsec.Position.html#t:t/0">ExParsec.Position.t</a>, state: state}
+    <a href="#t:t/1">t(state)</a> :: %ExParsec.Parser{input: <a href="ExParsec.Input.html#t:t/0">ExParsec.Input.t</a>, position: <a href="ExParsec.Position.html#t:t/0">ExParsec.Position.t</a> | nil, state: state}
   </p>
   
-      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a> instance.</p>
+      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Parser.html"><code class="inline">ExParsec.Parser</code></a> instance.</p>
 </div>
   
 </div>
@@ -99,11 +106,11 @@
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <div class="detail_header" id="get/1">
-    <span class="signature"><strong>get(parser)</strong></span>
+  <div class="detail_header" id="get/2">
+    <span class="signature"><strong>get(parser, opts \\ [])</strong></span>
     <div class="detail_header_links">
       <span class="detail_type">(function)</span>
-      <a href="#get/1" class="detail_link" title="Link to this function">#</a>
+      <a href="#get/2" class="detail_link" title="Link to this function">#</a>
       <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
     </div>
   </div>
@@ -111,16 +118,23 @@
     <p>Specs:</p>
     <ul class="spec">
       
-        <li>get(<a href="#t:t/1">t(state)</a>) :: {<a href="#t:t/1">t(state)</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a> | Token.t} | {:error, term} | :eof when state: var</li>
+        <li>get(<a href="#t:t/1">t(state)</a>, <a href="http://elixir-lang.org/docs/stable/elixir/Keyword.html#t:t/0">Keyword.t</a>) :: {<a href="#t:t/1">t(state)</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:codepoint/0">String.codepoint</a> | <a href="ExParsec.Token.html#t:t/0">ExParsec.Token.t</a>} | {:error, term} | :eof when state: var</li>
       
     </ul>
   
-  <div class="docstring"><p>Fetches a codepoint or token from the input. If no more data is available, <code>:eof</code> is returned. If an invalid codepoint or token is encountered, a tuple containing <code>:error</code> and a reason is returned. Otherwise, returns a tuple containing the advanced parser and the codepoint/token.</p>
-<p>This function is a wrapper on top of <a href="ExParsec.Input.html#get/1"><code>ExParsec.Input.get/1</code></a>, adding position tracking (codepoint index and line/column numbers). Position information can be found on the <code>position</code> field of <a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a>.</p>
+  <div class="docstring"><p>Fetches data from the input. If no more data is available, <code class="inline">:eof</code> is
+returned. If invalid input data is encountered, a tuple containing <code class="inline">:error</code>
+and a reason is returned. Otherwise, returns a tuple containing the
+advanced parser and the fetched data.</p>
+<p><code class="inline">opts</code> is passed through to <a href="ExParsec.Input.html#get/2"><code class="inline">ExParsec.Input.get/2</code></a>.</p>
+<p>This function is a wrapper on top of <a href="ExParsec.Input.html#get/2"><code class="inline">ExParsec.Input.get/2</code></a>, adding
+position tracking (codepoint index and line/column numbers) for input data
+that supports it. Position information can be found on the <code class="inline">position</code> field
+of <a href="ExParsec.Parser.html"><code class="inline">ExParsec.Parser</code></a>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/parser.ex#L44" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/parser.ex#L49" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -140,11 +154,11 @@
       
     </ul>
   
-  <div class="docstring"><p>Checks if <code>value</code> is an <a href="ExParsec.Parser.html"><code>ExParsec.Parser</code></a> instance.</p>
+  <div class="docstring"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Parser.html"><code class="inline">ExParsec.Parser</code></a> instance.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/parser.ex#L28" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/parser.ex#L30" class="view_source">Source</a>
   
 </div>
 

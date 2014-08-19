@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ExParsec.Token</title>
+    <title>ExParsec.Input.BinaryInput</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
 
@@ -20,10 +20,10 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Token.html">Token</a></div>
+      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Input.html">Input</a> &rarr; <a href="ExParsec.Input.BinaryInput.html">BinaryInput</a></div>
 
       <h1>
-        ExParsec.Token
+        ExParsec.Input.BinaryInput
         
       </h1>
 
@@ -43,33 +43,27 @@
 
       
         <div id="moduledoc" class="docstring">
-          <p>Represents an input token.</p>
+          <p>Provides data from an in-memory bitstring.</p>
 <ul>
-<li><code class="inline">position</code> is the token’s position in the source text.
-</li>
-<li><code class="inline">data</code> is any data associated with the token.
+<li><code class="inline">value</code> is the input bitstring.
 </li>
 </ul>
-<p>Tokens are commonly emitted by an initial lexing/tokenization pass and then
-consumed by the actual parsing pass.</p>
-<p>Note that all character parsers in <a href="ExParsec.Base.html"><code class="inline">ExParsec.Base</code></a> cannot be used when
-token input is in effect.</p>
 
         </div>
       
 
       
         <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/token.ex#L1" class="view_source">Source</a>
+/lib/ex_parsec/input/binary_input.ex#L1" class="view_source">Source</a>
       
 
       
         <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#token?/1">token?(value)</a></td>
+  <td class="summary_signature"><a href="#binary_input?/1">binary_input?(value)</a></td>
   
-    <td class="summary_synopsis"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Token.html"><code class="inline">ExParsec.Token</code></a> instance</p>
+    <td class="summary_synopsis"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Input.BinaryInput.html"><code class="inline">ExParsec.Input.BinaryInput</code></a> instance</p>
 </td>
   
 </tr>
@@ -81,11 +75,11 @@ token input is in effect.</p>
         <div id="types_details" class="details_list">
           <h2>Types <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></h2>
           <div class="type_detail">
-  <p class="typespec" id="t:t/1">
-    <a href="#t:t/1">t(data)</a> :: %ExParsec.Token{position: <a href="ExParsec.Position.html#t:t/0">ExParsec.Position.t</a>, data: data}
+  <p class="typespec" id="t:t/0">
+    <a href="#t:t/0">t</a> :: %ExParsec.Input.BinaryInput{value: bitstring}
   </p>
   
-      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Token.html"><code class="inline">ExParsec.Token</code></a> instance.</p>
+      <div class="typespec_doc"><p>The type of an <a href="ExParsec.Input.BinaryInput.html"><code class="inline">ExParsec.Input.BinaryInput</code></a> instance.</p>
 </div>
   
 </div>
@@ -97,11 +91,11 @@ token input is in effect.</p>
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <div class="detail_header" id="token?/1">
-    <span class="signature"><strong>token?(value)</strong></span>
+  <div class="detail_header" id="binary_input?/1">
+    <span class="signature"><strong>binary_input?(value)</strong></span>
     <div class="detail_header_links">
       <span class="detail_type">(function)</span>
-      <a href="#token?/1" class="detail_link" title="Link to this function">#</a>
+      <a href="#binary_input?/1" class="detail_link" title="Link to this function">#</a>
       <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
     </div>
   </div>
@@ -109,15 +103,15 @@ token input is in effect.</p>
     <p>Specs:</p>
     <ul class="spec">
       
-        <li>token?(term) :: boolean</li>
+        <li>binary_input?(term) :: boolean</li>
       
     </ul>
   
-  <div class="docstring"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Token.html"><code class="inline">ExParsec.Token</code></a> instance.</p>
+  <div class="docstring"><p>Checks if <code class="inline">value</code> is an <a href="ExParsec.Input.BinaryInput.html"><code class="inline">ExParsec.Input.BinaryInput</code></a> instance.</p>
 </div>
   
     <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/token.ex#L30" class="view_source">Source</a>
+/lib/ex_parsec/input/binary_input.ex#L19" class="view_source">Source</a>
   
 </div>
 

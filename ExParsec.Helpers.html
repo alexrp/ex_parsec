@@ -20,7 +20,7 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.0.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Helpers.html">Helpers</a></div>
+      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Helpers.html">Helpers</a></div>
 
       <h1>
         ExParsec.Helpers
@@ -49,7 +49,7 @@
       
 
       
-        <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
+        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
 /lib/ex_parsec/helpers.ex#L1" class="view_source">Source</a>
       
 
@@ -57,30 +57,41 @@
         <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#defparser/2">defparser(sig, list2)</a></td>
+  <td class="summary_signature"><a href="#defmparser/2">defmparser(sig, list2)</a></td>
   
-    <td class="summary_synopsis"><p>Defines a parser function. This is a convenience macro that eliminates some very common syntax noise</p>
+    <td class="summary_synopsis"><p>Defines a monadic parser function</p>
 </td>
   
 </tr>
 <tr>
-  <td class="summary_signature"><a href="#error/2">error(parser, message)</a></td>
+  <td class="summary_signature"><a href="#defparser/2">defparser(sig, list2)</a></td>
   
-    <td class="summary_synopsis"><p>Constructs an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> with the given <code>message</code> and the current position from <code>parser</code></p>
+    <td class="summary_synopsis"><p>Defines a parser function. This is a convenience macro that eliminates some
+very common syntax noise</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#error/3">error(parser, kind \\ nil, message)</a></td>
+  
+    <td class="summary_synopsis"><p>Constructs an <a href="ExParsec.Error.html"><code class="inline">ExParsec.Error</code></a> with the given <code class="inline">message</code> and the current
+position from <code class="inline">parser</code></p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#failure/2">failure(status \\ :error, errors)</a></td>
   
-    <td class="summary_synopsis"><p>Constructs an unsuccessful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>status</code> (either <code>:error</code> or <code>:fatal</code>) as the error kind and <code>errors</code> as the list of errors</p>
+    <td class="summary_synopsis"><p>Constructs an unsuccessful <a href="ExParsec.Reply.html"><code class="inline">ExParsec.Reply</code></a> with <code class="inline">status</code> (either <code class="inline">:error</code>
+or <code class="inline">:fatal</code>) as the error kind and <code class="inline">errors</code> as the list of errors</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#success/3">success(parser, result, errors \\ [])</a></td>
   
-    <td class="summary_synopsis"><p>Constructs a successful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>result</code> as the result value. <code>errors</code> can optionally be used to propagate error messages, if any</p>
+    <td class="summary_synopsis"><p>Constructs a successful <a href="ExParsec.Reply.html"><code class="inline">ExParsec.Reply</code></a> with <code class="inline">result</code> as the result value.
+<code class="inline">errors</code> can optionally be used to propagate error messages, if any</p>
 </td>
   
 </tr>
@@ -94,11 +105,11 @@
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <div class="detail_header" id="error/2">
-    <span class="signature"><strong>error(parser, message)</strong></span>
+  <div class="detail_header" id="error/3">
+    <span class="signature"><strong>error(parser, kind \\ nil, message)</strong></span>
     <div class="detail_header_links">
       <span class="detail_type">(function)</span>
-      <a href="#error/2" class="detail_link" title="Link to this function">#</a>
+      <a href="#error/3" class="detail_link" title="Link to this function">#</a>
       <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
     </div>
   </div>
@@ -106,15 +117,16 @@
     <p>Specs:</p>
     <ul class="spec">
       
-        <li>error(<a href="ExParsec.Parser.html#t:t/1">ExParsec.Parser.t(term)</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a></li>
+        <li>error(<a href="ExParsec.Parser.html#t:t/1">ExParsec.Parser.t(term)</a>, <a href="ExParsec.Error.html#t:kind/0">ExParsec.Error.kind</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="ExParsec.Error.html#t:t/0">ExParsec.Error.t</a></li>
       
     </ul>
   
-  <div class="docstring"><p>Constructs an <a href="ExParsec.Error.html"><code>ExParsec.Error</code></a> with the given <code>message</code> and the current position from <code>parser</code>.</p>
+  <div class="docstring"><p>Constructs an <a href="ExParsec.Error.html"><code class="inline">ExParsec.Error</code></a> with the given <code class="inline">message</code> and the current
+position from <code class="inline">parser</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/helpers.ex#L68" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/helpers.ex#L126" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -134,11 +146,12 @@
       
     </ul>
   
-  <div class="docstring"><p>Constructs an unsuccessful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>status</code> (either <code>:error</code> or <code>:fatal</code>) as the error kind and <code>errors</code> as the list of errors.</p>
+  <div class="docstring"><p>Constructs an unsuccessful <a href="ExParsec.Reply.html"><code class="inline">ExParsec.Reply</code></a> with <code class="inline">status</code> (either <code class="inline">:error</code>
+or <code class="inline">:fatal</code>) as the error kind and <code class="inline">errors</code> as the list of errors.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/helpers.ex#L58" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/helpers.ex#L116" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -158,11 +171,12 @@
       
     </ul>
   
-  <div class="docstring"><p>Constructs a successful <a href="ExParsec.Reply.html"><code>ExParsec.Reply</code></a> with <code>result</code> as the result value. <code>errors</code> can optionally be used to propagate error messages, if any.</p>
+  <div class="docstring"><p>Constructs a successful <a href="ExParsec.Reply.html"><code class="inline">ExParsec.Reply</code></a> with <code class="inline">result</code> as the result value.
+<code class="inline">errors</code> can optionally be used to propagate error messages, if any.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/helpers.ex#L46" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/helpers.ex#L105" class="view_source">Source</a>
   
 </div>
 
@@ -173,6 +187,57 @@
         <div id="macros_details" class="details_list">
           <h2>Macros</h2>
           <div class="detail">
+  <div class="detail_header" id="defmparser/2">
+    <span class="signature"><strong>defmparser(sig, list2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(macro)</span>
+      <a href="#defmparser/2" class="detail_link" title="Link to this macro">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <div class="docstring"><p>Defines a monadic parser function.</p>
+<p>A monadic parser function’s body is defined through the
+<a href="ExParsec.Monad.Parse.html#m/1"><code class="inline">ExParsec.Monad.Parse.m/1</code></a> macro. Inside such a function, the <code class="inline">&lt;-</code>
+operator can be used to bind names to parser invocations. Values
+can be returned by using the special <code class="inline">return</code> macro.</p>
+<p>For example, consider this parser to parse a field declaration in a
+programming language:</p>
+<pre><code>use ExParsec
+
+defparser field() in p do
+    bind(type(), fn(ty) -&gt;
+        sequence([skip_many(space),
+                  char(&quot;:&quot;),
+                  skip_many(space),
+                  bind(identifier(), fn(id) -&gt;
+                      return(%Field{type: ty, name: id})
+                  end)])
+    end)
+end</code></pre>
+<p>This is quite unwieldy. Modifying this at a later point would be a rather
+complicated matter.</p>
+<p>We can write this in a much more readable and maintainable way with monadic
+syntax:</p>
+<pre><code>use ExParsec
+
+defmparser field() do
+    ty &lt;- type()
+    skip_many(space)
+    char(&quot;:&quot;)
+    skip_many(space)
+    id &lt;- identifier()
+    return %Field{type: ty, name: id}
+end</code></pre>
+<p>It’s now very clear what the parser is doing. There is virtually no syntax
+noise. Modifying this parser later down the road would also be much easier.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/helpers.ex#L87" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
   <div class="detail_header" id="defparser/2">
     <span class="signature"><strong>defparser(sig, list2)</strong></span>
     <div class="detail_header_links">
@@ -182,7 +247,8 @@
     </div>
   </div>
   
-  <div class="docstring"><p>Defines a parser function. This is a convenience macro that eliminates some very common syntax noise.</p>
+  <div class="docstring"><p>Defines a parser function. This is a convenience macro that eliminates some
+very common syntax noise.</p>
 <p>Example:</p>
 <pre><code>defparser return(value) in p do
     success(p, value)
@@ -195,8 +261,8 @@ end</code></pre>
 end</code></pre>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/34fc98c00496ebdbcea3fdf7458142cb0389a28c
-/lib/ex_parsec/helpers.ex#L28" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+/lib/ex_parsec/helpers.ex#L31" class="view_source">Source</a>
   
 </div>
 
