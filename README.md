@@ -37,9 +37,9 @@ iex> ExParsec.parse_value "  spa ces  ",
 ## Features
 
 * Can parse context-sensitive grammars.
-* High-quality error messages readable by humans.
+* High-quality, customizable error messages.
 * Full UTF-8 string support.
-* Non-text input can be parsed (e.g. tokens).
+* Non-text input such as binary data and tokens.
 * Support for theoretically infinitely large files.
 * Monadic parse blocks based on Elixir macros.
 * Simple, extensible API surface.
