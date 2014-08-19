@@ -18,6 +18,32 @@ defmodule ExParsec do
     * `ExParsec.Parser`
     * `ExParsec.Position`
     * `ExParsec.Reply`
+
+    A `:mode` option can be given, indicating which module containing common
+    parsers should be `import`ed. Currently, `Text` and `Binary` are valid
+    values for this option. If the option isn't given, `Text` is the default.
+    `nil` may be given to not `import` any module. The mode must given as a
+    compile-time literal.
+
+    Examples:
+
+        defmodule TextParsing do
+            use ExParsec
+
+            # ...
+        end
+
+        defmodule BinaryParsing do
+            use ExParsec, mode: Binary
+
+            # ...
+        end
+
+        defmodule TokenParsing do
+            use ExParsec, mode: nil
+
+            # ...
+        end
     """
 
     alias ExParsec.Error
