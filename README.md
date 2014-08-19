@@ -10,9 +10,11 @@ Add ExParsec as a dependency in your `mix.exs` file:
 
 ```elixir
 def deps do
-  [ {:ex_parsec, "~> 0.0.0"} ]
+  [ {:ex_parsec, "~> x.y.z"} ]
 end
 ```
+
+Replace `x.y.z` with whatever released version you would like to depend on.
 
 After you are done, run `mix deps.get` in your shell to fetch and compile
 ExParsec. Start an interactive Elixir shell with `iex -S mix`.
