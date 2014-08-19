@@ -346,6 +346,18 @@ defmodule ExParsec.Base do
     end
 
     @doc """
+    Applies `parser1` as many times as possible, separated by `parser2`.
+    Returns results of `parser1` in a list.
+    """
+    @spec sep_by(ExParsec.t(state, result), ExParsec.t(state, term())) ::
+          ExParsec.t(state, [result]) when [state: var, result: var]
+    defparser sep_by(parser1, parser2) in p do
+        either(pipe([parser1, many(pair_right(parser2, parser1))],
+                    fn([h, t]) -> [h | t] end),
+               return([])).(p)
+    end
+
+    @doc """
     Applies `parser` if possible. Discards the result.
     """
     @spec skip(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
