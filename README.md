@@ -1,6 +1,8 @@
 # ExParsec
 
 [![Build Status](https://travis-ci.org/alexrp/ex_parsec.png?branch=master)](https://travis-ci.org/alexrp/ex_parsec)
+[![Hex Version](https://img.shields.io/hexpm/v/ex_parsec.svg)](https://hex.pm/packages/ex_parsec)
+[![Hex Downloads](https://img.shields.io/hexpm/dt/ex_parsec.svg)](https://hex.pm/packages/ex_parsec)
 
 A parser combinator library inspired by Parsec.
 
