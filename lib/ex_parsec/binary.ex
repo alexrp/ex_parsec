@@ -25,6 +25,18 @@ defmodule ExParsec.Binary do
     end
 
     @doc """
+    Parses `n` bytes of data.
+    """
+    @spec bytes(non_neg_integer()) :: ExParsec.t(term(), binary())
+    defparser bytes(n) in p do
+        case Parser.get(p, [n: n * 8]) do
+            {:error, r} -> failure([error(p, :io, "encountered I/O error: #{inspect(r)}")])
+            :eof -> failure([error(p, :eof, "expected #{n} bytes but encountered end of file")])
+            {p, bytes} -> success(p, bytes)
+        end
+    end
+
+    @doc """
     Parses an unsigned `n`-bit integer encoded with the given `endianness`.
     """
     @spec uint(pos_integer(), :be | :le) ::
