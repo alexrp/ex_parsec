@@ -25,82 +25,42 @@ defmodule ExParsec.Binary do
     end
 
     @doc """
-    Parses an unsigned 8-bit integer.
+    Parses an unsigned `n`-bit integer encoded with the given `endianness`.
     """
-    @spec uint8() :: ExParsec.t(term(), 0 .. 255)
-    defparser uint8() in p do
-        map(bits(8), fn(<<b>>) -> b end).(p)
+    @spec uint(pos_integer(), :be | :le) ::
+          ExParsec.t(term(), non_neg_integer())
+    defparser uint(n, endianness) in p do
+        map(bits(n), fn(bin) ->
+            case endianness do
+                :be -> <<b :: size(n)>> = bin
+                :le -> <<b :: size(n)-little>> = bin
+            end
+
+            b
+        end).(p)
     end
 
     @doc """
-    Parses a signed 8-bit integer.
+    Parses a signed `n`-bit integer encoded with the given `endianness`.
     """
-    @spec sint8() :: ExParsec.t(term(), -128 .. 127)
-    defparser sint8() in p do
-        map(bits(8), fn(<<b :: signed>>) -> b end).(p)
+    @spec sint(pos_integer(), :be | :le) ::
+          ExParsec.t(term(), integer())
+    defparser sint(n, endianness) in p do
+        map(bits(n), fn(bin) ->
+            case endianness do
+                :be -> <<b :: signed-size(n)>> = bin
+                :le -> <<b :: signed-size(n)-little>> = bin
+            end
+
+            b
+        end).(p)
     end
 
     @doc """
-    Parses an unsigned 16-bit integer.
+    Parses an `n`-bit floating point value.
     """
-    @spec uint16() :: ExParsec.t(term(), 0 .. 65535)
-    defparser uint16() in p do
-        map(bits(16), fn(<<b :: size(16)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses a signed 16-bit integer.
-    """
-    @spec sint16() :: ExParsec.t(term(), -32768 .. 32767)
-    defparser sint16() in p do
-        map(bits(16), fn(<<b :: signed-size(16)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses an unsigned 32-bit integer.
-    """
-    @spec uint32() :: ExParsec.t(term(), 0 .. 4294967295)
-    defparser uint32() in p do
-        map(bits(32), fn(<<b :: size(32)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses a signed 32-bit integer.
-    """
-    @spec sint32() :: ExParsec.t(term(), -2147483648 .. 2147483647)
-    defparser sint32() in p do
-        map(bits(32), fn(<<b :: signed-size(32)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses an unsigned 64-bit integer.
-    """
-    @spec uint64() :: ExParsec.t(term(), 0 .. 18446744073709551615)
-    defparser uint64() in p do
-        map(bits(64), fn(<<b :: size(64)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses a signed 64-bit integer.
-    """
-    @spec sint64() :: ExParsec.t(term(), -9223372036854775808 .. 9223372036854775807)
-    defparser sint64() in p do
-        map(bits(64), fn(<<b :: signed-size(64)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses a 32-bit floating point value.
-    """
-    @spec float32() :: ExParsec.t(term(), float())
-    defparser float32() in p do
-        map(bits(32), fn(<<b :: float-size(32)>>) -> b end).(p)
-    end
-
-    @doc """
-    Parses a 64-bit floating point value.
-    """
-    @spec float64() :: ExParsec.t(term(), float())
-    defparser float64() in p do
-        map(bits(64), fn(<<b :: float>>) -> b end).(p)
+    @spec float(32 | 64) :: ExParsec.t(term(), float())
+    defparser float(n) in p do
+        map(bits(n), fn(<<b :: float-size(n)>>) -> b end).(p)
     end
 end
