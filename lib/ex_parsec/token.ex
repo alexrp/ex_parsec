@@ -7,9 +7,6 @@ defmodule ExParsec.Token do
 
     Tokens are commonly emitted by an initial lexing/tokenization pass and then
     consumed by the actual parsing pass.
-
-    Note that all character parsers in `ExParsec.Base` cannot be used when
-    token input is in effect.
     """
 
     alias ExParsec.Position
