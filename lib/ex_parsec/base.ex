@@ -185,7 +185,7 @@ defmodule ExParsec.Base do
                 errs = List.flatten([r.errors | errs])
 
                 if r.status in [:ok, :fatal] do
-                    throw(%Reply{r | :errors => errs})
+                    throw({:"$ex_parsec", %Reply{r | :errors => errs}})
                 end
 
                 errs
@@ -193,7 +193,7 @@ defmodule ExParsec.Base do
 
             failure(errs)
         catch
-            :throw, r -> r
+            :throw, {:"$ex_parsec", r} -> r
         end
     end
 
@@ -212,7 +212,7 @@ defmodule ExParsec.Base do
                 errs = List.flatten([r.errors | errs])
 
                 if r.status != :ok do
-                    throw(%Reply{r | :errors => errs})
+                    throw({:"$ex_parsec", %Reply{r | :errors => errs}})
                 end
 
                 {r.parser, errs, [r.result | ress]}
@@ -222,7 +222,7 @@ defmodule ExParsec.Base do
 
             success(p, res, errs)
         catch
-            :throw, r -> r
+            :throw, {:"$ex_parsec", r} -> r
         end
     end
 
@@ -306,7 +306,7 @@ defmodule ExParsec.Base do
                     errs = List.flatten([r.errors | errs])
 
                     if r.status != :ok do
-                        throw(%Reply{r | :errors => errs})
+                        throw({:"$ex_parsec", %Reply{r | :errors => errs}})
                     end
 
                     {r.parser, errs, [r.result | ress]}
@@ -314,7 +314,7 @@ defmodule ExParsec.Base do
 
                 success(p, Enum.reverse(ress), errs)
             catch
-                :throw, r -> r
+                :throw, {:"$ex_parsec", r} -> r
             end
         end
     end
