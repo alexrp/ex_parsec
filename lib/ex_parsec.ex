@@ -44,6 +44,9 @@ defmodule ExParsec do
 
             # ...
         end
+
+    An `:operators` option is also available. If set to the compile-time `true`
+    literal, the `ExParsec.Operators` module will be `import`ed.
     """
 
     alias ExParsec.Error
@@ -57,11 +60,14 @@ defmodule ExParsec do
     @doc false
     defmacro __using__(opts) do
         mod = Module.concat(ExParsec, Macro.expand(opts[:mode], __ENV__) || Text)
+        ops = Macro.expand(opts[:operators], __ENV__) || false
 
         quote do
             import ExParsec
             import ExParsec.Base
             import ExParsec.Helpers
+
+            if unquote(ops), do: import ExParsec.Operators
 
             import unquote(mod)
 
