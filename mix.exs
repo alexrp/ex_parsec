@@ -21,7 +21,8 @@ defmodule ExParsec.Mixfile do
     end
 
     defp deps() do
-        [{:coverex, "~> 0.0.7", only: [:test]},
+        [{:benchfella, github: "alco/benchfella", only: [:dev]},
+         {:coverex, "~> 0.0.7", only: [:test]},
          {:dialyze, "~> 0.1.2", only: [:dev]},
          {:earmark, "~> 0.1.10", only: [:dev]},
          {:ex_doc, "~> 0.5.2", only: [:dev]},
