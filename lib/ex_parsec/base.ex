@@ -79,7 +79,7 @@ defmodule ExParsec.Base do
     """
     @spec eof() :: ExParsec.t(term(), nil)
     defparser eof() in p do
-        # We can skip `ExParsec.Parser.get/1` since we just need to check for
+        # We can skip `ExParsec.Parser.get/2` since we just need to check for
         # EOF - we don't care about position info.
         if Input.get(p.input) == :eof do
             success(p, nil)
@@ -320,13 +320,13 @@ defmodule ExParsec.Base do
     end
 
     @doc """
-    Applies `parser` as many times as possible. Returns all results in a list.
+    Applies `parser` one or more times. Returns all results in a list.
     """
-    @spec many(ExParsec.t(state, result)) :: ExParsec.t(state, [result])
+    @spec many1(ExParsec.t(state, result)) :: ExParsec.t(state, [result, ...])
           when [state: var, result: var]
-    defparser many(parser) in p do
+    defparser many1(parser) in p do
         loop = fn(loop, p, ress, errs) ->
-            # We can skip `ExParsec.Parser.get/1` since we just need to check for
+            # We can skip `ExParsec.Parser.get/2` since we just need to check for
             # EOF - we don't care about position info.
             if Input.get(p.input) == :eof do
                 success(p, Enum.reverse(ress), errs)
@@ -342,7 +342,33 @@ defmodule ExParsec.Base do
             end
         end
 
-        loop.(loop, p, [], [])
+        r = parser.(p)
+
+        if r.status == :ok do
+            loop.(loop, r.parser, [r.result], r.errors)
+        else
+            r
+        end
+    end
+
+    @doc """
+    Applies `parser` as many times as possible. Returns all results in a list.
+    """
+    @spec many(ExParsec.t(state, result)) :: ExParsec.t(state, [result])
+          when [state: var, result: var]
+    defparser many(parser) in p do
+        either(many1(parser), return([])).(p)
+    end
+
+    @doc """
+    Applies `parser1` one or more times, separated by `parser2`. Returns
+    results of `parser1` in a list.
+    """
+    @spec sep_by1(ExParsec.t(state, result), ExParsec.t(state, term())) ::
+          ExParsec.t(state, [result, ...]) when [state: var, result: var]
+    defparser sep_by1(parser1, parser2) in p do
+        pipe([parser1, many(pair_right(parser2, parser1))],
+             fn([h, t]) -> [h | t] end).(p)
     end
 
     @doc """
@@ -365,6 +391,16 @@ defmodule ExParsec.Base do
     defparser skip(parser) in p do
         # TODO: Optimize this so we don't build up a ton of data.
         ignore(option(parser)).(p)
+    end
+
+    @doc """
+    Applies `parser´ one or more times. Discards the results.
+    """
+    @spec skip_many(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
+          when [state: var]
+    defparser skip_many1(parser) in p do
+        # TODO: Optimize this so we don't build up a ton of data.
+        ignore(many1(parser)).(p)
     end
 
     @doc """
