@@ -20,7 +20,7 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Base.html">Base</a></div>
+      <div class="breadcrumbs">ExParsec v0.2.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Base.html">Base</a></div>
 
       <h1>
         ExParsec.Base
@@ -47,7 +47,7 @@
       
 
       
-        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+        <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L1" class="view_source">Source</a>
       
 
@@ -171,6 +171,13 @@ on <code class="inline">name</code> of the form <code class="inline">expected #{
   
 </tr>
 <tr>
+  <td class="summary_signature"><a href="#many1/1">many1(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code class="inline">parser</code> one or more times. Returns all results in a list</p>
+</td>
+  
+</tr>
+<tr>
   <td class="summary_signature"><a href="#map/2">map(parser, function)</a></td>
   
     <td class="summary_synopsis"><p>Applies <code class="inline">parser</code> and passes its result to <code class="inline">function</code>. <code class="inline">function</code>‘s return
@@ -226,6 +233,22 @@ both parsers as a tuple</p>
   
 </tr>
 <tr>
+  <td class="summary_signature"><a href="#sep_by/2">sep_by(parser1, parser2)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code class="inline">parser1</code> as many times as possible, separated by <code class="inline">parser2</code>.
+Returns results of <code class="inline">parser1</code> in a list</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#sep_by1/2">sep_by1(parser1, parser2)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies <code class="inline">parser1</code> one or more times, separated by <code class="inline">parser2</code>. Returns
+results of <code class="inline">parser1</code> in a list</p>
+</td>
+  
+</tr>
+<tr>
   <td class="summary_signature"><a href="#sequence/1">sequence(parsers)</a></td>
   
     <td class="summary_synopsis"><p>Applies each parser in <code class="inline">parsers</code>. Returns all results in a list</p>
@@ -250,6 +273,13 @@ both parsers as a tuple</p>
   <td class="summary_signature"><a href="#skip_many/1">skip_many(parser)</a></td>
   
     <td class="summary_synopsis"><p>Applies <code class="inline">parser</code> as many times as possible. Discards the results</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#skip_many1/1">skip_many1(parser)</a></td>
+  
+    <td class="summary_synopsis"><p>Applies `parser´ one or more times. Discards the results</p>
 </td>
   
 </tr>
@@ -304,7 +334,7 @@ both parsers as a tuple</p>
 results in a fatal error, it will be turned into a regular error.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L154" class="view_source">Source</a>
   
 </div>
@@ -329,7 +359,7 @@ results in a fatal error, it will be turned into a regular error.</p>
 of <code class="inline">parser2</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L288" class="view_source">Source</a>
   
 </div>
@@ -355,7 +385,7 @@ of <code class="inline">parser2</code>.</p>
 its result is returned.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L118" class="view_source">Source</a>
   
 </div>
@@ -381,7 +411,7 @@ two arguments to <code class="inline">function</code>. <code class="inline">func
 result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L246" class="view_source">Source</a>
   
 </div>
@@ -406,7 +436,7 @@ result.</p>
 variant of <a href="#either/2"><code class="inline">either/2</code></a> generalized for any number of parsers.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L181" class="view_source">Source</a>
   
 </div>
@@ -431,8 +461,8 @@ variant of <a href="#either/2"><code class="inline">either/2</code></a> generali
 extra error generated based on <code class="inline">name</code> of the form <code class="inline">&quot;expected #{name}&quot;</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/base.ex#L390" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L438" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -457,7 +487,7 @@ that fails, this combinator fails. Otherwise, returns the first successful
 result value obtained.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L171" class="view_source">Source</a>
   
 </div>
@@ -481,7 +511,7 @@ result value obtained.</p>
   <div class="docstring"><p>Only succeeds at the end of the input data.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L81" class="view_source">Source</a>
   
 </div>
@@ -505,7 +535,7 @@ result value obtained.</p>
   <div class="docstring"><p>Fails with the given error <code class="inline">message</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L65" class="view_source">Source</a>
   
 </div>
@@ -529,7 +559,7 @@ result value obtained.</p>
   <div class="docstring"><p>Fails fatally with the given error <code class="inline">message</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L73" class="view_source">Source</a>
   
 </div>
@@ -553,7 +583,7 @@ result value obtained.</p>
   <div class="docstring"><p>Returns the current position as result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L41" class="view_source">Source</a>
   
 </div>
@@ -577,7 +607,7 @@ result value obtained.</p>
   <div class="docstring"><p>Returns the user state as result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L17" class="view_source">Source</a>
   
 </div>
@@ -601,7 +631,7 @@ result value obtained.</p>
   <div class="docstring"><p>Applies <code class="inline">parser</code> and discards its result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L107" class="view_source">Source</a>
   
 </div>
@@ -626,8 +656,8 @@ result value obtained.</p>
 on <code class="inline">name</code> of the form <code class="inline">expected #{name}</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/base.ex#L374" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L422" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -650,7 +680,31 @@ on <code class="inline">name</code> of the form <code class="inline">expected #{
   <div class="docstring"><p>Applies <code class="inline">parser</code> as many times as possible. Returns all results in a list.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L359" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="many1/1">
+    <span class="signature"><strong>many1(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#many1/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>many1(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, [result, ...])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code class="inline">parser</code> one or more times. Returns all results in a list.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L327" class="view_source">Source</a>
   
 </div>
@@ -675,7 +729,7 @@ on <code class="inline">name</code> of the form <code class="inline">expected #{
 value is returned as the result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L98" class="view_source">Source</a>
   
 </div>
@@ -700,7 +754,7 @@ value is returned as the result.</p>
 result, or <code class="inline">nil</code> if <code class="inline">parser</code> could not be applied.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L138" class="view_source">Source</a>
   
 </div>
@@ -725,7 +779,7 @@ result, or <code class="inline">nil</code> if <code class="inline">parser</code>
 both parsers as a tuple.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L277" class="view_source">Source</a>
   
 </div>
@@ -750,7 +804,7 @@ both parsers as a tuple.</p>
 <code class="inline">parser1</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L256" class="view_source">Source</a>
   
 </div>
@@ -775,7 +829,7 @@ both parsers as a tuple.</p>
 <code class="inline">parser2</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L266" class="view_source">Source</a>
   
 </div>
@@ -800,7 +854,7 @@ both parsers as a tuple.</p>
 <code class="inline">function</code>. <code class="inline">function</code>‘s return value is returned as the result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L206" class="view_source">Source</a>
   
 </div>
@@ -824,8 +878,58 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Returns <code class="inline">value</code> as result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L49" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="sep_by/2">
+    <span class="signature"><strong>sep_by(parser1, parser2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#sep_by/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>sep_by(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, [result])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code class="inline">parser1</code> as many times as possible, separated by <code class="inline">parser2</code>.
+Returns results of <code class="inline">parser1</code> in a list.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L380" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="sep_by1/2">
+    <span class="signature"><strong>sep_by1(parser1, parser2)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#sep_by1/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>sep_by1(<a href="ExParsec.html#t:t/2">ExParsec.t(state, result)</a>, <a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, [result, ...])</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Applies <code class="inline">parser1</code> one or more times, separated by <code class="inline">parser2</code>. Returns
+results of <code class="inline">parser1</code> in a list.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L369" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -848,7 +952,7 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Applies each parser in <code class="inline">parsers</code>. Returns all results in a list.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L234" class="view_source">Source</a>
   
 </div>
@@ -872,7 +976,7 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Sets the user state to <code class="inline">state</code>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L25" class="view_source">Source</a>
   
 </div>
@@ -896,8 +1000,8 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Applies <code class="inline">parser</code> if possible. Discards the result.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/base.ex#L353" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L391" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -915,13 +1019,32 @@ both parsers as a tuple.</p>
       
         <li>skip_many(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a></li>
       
+        <li>skip_many(<a href="ExParsec.html#t:t/2">ExParsec.t(state, term)</a>) :: <a href="ExParsec.html#t:t/2">ExParsec.t(state, nil)</a></li>
+      
     </ul>
   
   <div class="docstring"><p>Applies <code class="inline">parser</code> as many times as possible. Discards the results.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/base.ex#L363" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L411" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="skip_many1/1">
+    <span class="signature"><strong>skip_many1(parser)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#skip_many1/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <div class="docstring"><p>Applies `parser´ one or more times. Discards the results.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/base.ex#L401" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -944,7 +1067,7 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Applies <code class="inline">parser</code> to the input data <code class="inline">n</code> times. Returns results in a list.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L297" class="view_source">Source</a>
   
 </div>
@@ -968,7 +1091,7 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Updates the user state by applying <code class="inline">updater</code> to it.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L33" class="view_source">Source</a>
   
 </div>
@@ -992,7 +1115,7 @@ both parsers as a tuple.</p>
   <div class="docstring"><p>Fails without an error message.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/base.ex#L57" class="view_source">Source</a>
   
 </div>

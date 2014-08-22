@@ -20,7 +20,7 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Binary.html">Binary</a></div>
+      <div class="breadcrumbs">ExParsec v0.2.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a> &rarr; <a href="ExParsec.Binary.html">Binary</a></div>
 
       <h1>
         ExParsec.Binary
@@ -50,7 +50,7 @@ option specifying how many bits to fetch.</p>
       
 
       
-        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+        <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/binary.ex#L1" class="view_source">Source</a>
       
 
@@ -65,72 +65,30 @@ option specifying how many bits to fetch.</p>
   
 </tr>
 <tr>
-  <td class="summary_signature"><a href="#float32/0">float32()</a></td>
+  <td class="summary_signature"><a href="#bytes/1">bytes(n)</a></td>
   
-    <td class="summary_synopsis"><p>Parses a 32-bit floating point value</p>
+    <td class="summary_synopsis"><p>Parses <code class="inline">n</code> bytes of data</p>
 </td>
   
 </tr>
 <tr>
-  <td class="summary_signature"><a href="#float64/0">float64()</a></td>
+  <td class="summary_signature"><a href="#float/1">float(n)</a></td>
   
-    <td class="summary_synopsis"><p>Parses a 64-bit floating point value</p>
+    <td class="summary_synopsis"><p>Parses an <code class="inline">n</code>-bit floating point value</p>
 </td>
   
 </tr>
 <tr>
-  <td class="summary_signature"><a href="#sint16/0">sint16()</a></td>
+  <td class="summary_signature"><a href="#sint/2">sint(n, endianness)</a></td>
   
-    <td class="summary_synopsis"><p>Parses a signed 16-bit integer</p>
+    <td class="summary_synopsis"><p>Parses a signed <code class="inline">n</code>-bit integer encoded with the given <code class="inline">endianness</code></p>
 </td>
   
 </tr>
 <tr>
-  <td class="summary_signature"><a href="#sint32/0">sint32()</a></td>
+  <td class="summary_signature"><a href="#uint/2">uint(n, endianness)</a></td>
   
-    <td class="summary_synopsis"><p>Parses a signed 32-bit integer</p>
-</td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#sint64/0">sint64()</a></td>
-  
-    <td class="summary_synopsis"><p>Parses a signed 64-bit integer</p>
-</td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#sint8/0">sint8()</a></td>
-  
-    <td class="summary_synopsis"><p>Parses a signed 8-bit integer</p>
-</td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#uint16/0">uint16()</a></td>
-  
-    <td class="summary_synopsis"><p>Parses an unsigned 16-bit integer</p>
-</td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#uint32/0">uint32()</a></td>
-  
-    <td class="summary_synopsis"><p>Parses an unsigned 32-bit integer</p>
-</td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#uint64/0">uint64()</a></td>
-  
-    <td class="summary_synopsis"><p>Parses an unsigned 64-bit integer</p>
-</td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#uint8/0">uint8()</a></td>
-  
-    <td class="summary_synopsis"><p>Parses an unsigned 8-bit integer</p>
+    <td class="summary_synopsis"><p>Parses an unsigned <code class="inline">n</code>-bit integer encoded with the given <code class="inline">endianness</code></p>
 </td>
   
 </tr>
@@ -163,16 +121,16 @@ option specifying how many bits to fetch.</p>
   <div class="docstring"><p>Parses <code class="inline">n</code> bits of data.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/binary.ex#L19" class="view_source">Source</a>
   
 </div>
 <div class="detail">
-  <div class="detail_header" id="float32/0">
-    <span class="signature"><strong>float32()</strong></span>
+  <div class="detail_header" id="bytes/1">
+    <span class="signature"><strong>bytes(n)</strong></span>
     <div class="detail_header_links">
       <span class="detail_type">(function)</span>
-      <a href="#float32/0" class="detail_link" title="Link to this function">#</a>
+      <a href="#bytes/1" class="detail_link" title="Link to this function">#</a>
       <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
     </div>
   </div>
@@ -180,231 +138,87 @@ option specifying how many bits to fetch.</p>
     <p>Specs:</p>
     <ul class="spec">
       
-        <li>float32 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, float)</a></li>
+        <li>bytes(non_neg_integer) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, binary)</a></li>
       
     </ul>
   
-  <div class="docstring"><p>Parses a 32-bit floating point value.</p>
+  <div class="docstring"><p>Parses <code class="inline">n</code> bytes of data.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L95" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="float64/0">
-    <span class="signature"><strong>float64()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#float64/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>float64 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, float)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses a 64-bit floating point value.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L103" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="sint16/0">
-    <span class="signature"><strong>sint16()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#sint16/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>sint16 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, -32768 .. 32767)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses a signed 16-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L55" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="sint32/0">
-    <span class="signature"><strong>sint32()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#sint32/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>sint32 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, -2147483648 .. 2147483647)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses a signed 32-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L71" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="sint64/0">
-    <span class="signature"><strong>sint64()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#sint64/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>sint64 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, -9223372036854775808 .. 9223372036854775807)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses a signed 64-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L87" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="sint8/0">
-    <span class="signature"><strong>sint8()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#sint8/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>sint8 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, -128 .. 127)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses a signed 8-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L39" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="uint16/0">
-    <span class="signature"><strong>uint16()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#uint16/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>uint16 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, 0 .. 65535)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses an unsigned 16-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L47" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="uint32/0">
-    <span class="signature"><strong>uint32()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#uint32/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>uint32 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, 0 .. 4294967295)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses an unsigned 32-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L63" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="uint64/0">
-    <span class="signature"><strong>uint64()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#uint64/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>uint64 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, 0 .. 18446744073709551615)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses an unsigned 64-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec/binary.ex#L79" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <div class="detail_header" id="uint8/0">
-    <span class="signature"><strong>uint8()</strong></span>
-    <div class="detail_header_links">
-      <span class="detail_type">(function)</span>
-      <a href="#uint8/0" class="detail_link" title="Link to this function">#</a>
-      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
-    </div>
-  </div>
-  
-    <p>Specs:</p>
-    <ul class="spec">
-      
-        <li>uint8 :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, 0 .. 255)</a></li>
-      
-    </ul>
-  
-  <div class="docstring"><p>Parses an unsigned 8-bit integer.</p>
-</div>
-  
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec/binary.ex#L31" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="float/1">
+    <span class="signature"><strong>float(n)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#float/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>float(32 | 64) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, float)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses an <code class="inline">n</code>-bit floating point value.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/binary.ex#L75" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="sint/2">
+    <span class="signature"><strong>sint(n, endianness)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#sint/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>sint(pos_integer, :be | :le) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, integer)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses a signed <code class="inline">n</code>-bit integer encoded with the given <code class="inline">endianness</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/binary.ex#L60" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <div class="detail_header" id="uint/2">
+    <span class="signature"><strong>uint(n, endianness)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#uint/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>uint(pos_integer, :be | :le) :: <a href="ExParsec.html#t:t/2">ExParsec.t(term, non_neg_integer)</a></li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Parses an unsigned <code class="inline">n</code>-bit integer encoded with the given <code class="inline">endianness</code>.</p>
+</div>
+  
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec/binary.ex#L44" class="view_source">Source</a>
   
 </div>
 

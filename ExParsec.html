@@ -20,7 +20,7 @@
     </script>
 
     <div id="content">
-      <div class="breadcrumbs">ExParsec v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a></div>
+      <div class="breadcrumbs">ExParsec v0.2.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExParsec.html">ExParsec</a></div>
 
       <h1>
         ExParsec
@@ -69,12 +69,35 @@
 <li><a href="ExParsec.Reply.html"><code class="inline">ExParsec.Reply</code></a>
 </li>
 </ul>
+<p>A <code class="inline">:mode</code> option can be given, indicating which module containing common
+parsers should be <code class="inline">import</code>ed. Currently, <code class="inline">Text</code> and <code class="inline">Binary</code> are valid
+values for this option. If the option isn’t given, <code class="inline">Text</code> is the default.
+<code class="inline">nil</code> may be given to not <code class="inline">import</code> any module. The mode must given as a
+compile-time literal.</p>
+<p>Examples:</p>
+<pre><code>defmodule TextParsing do
+    use ExParsec
+
+    # ...
+end
+
+defmodule BinaryParsing do
+    use ExParsec, mode: Binary
+
+    # ...
+end
+
+defmodule TokenParsing do
+    use ExParsec, mode: nil
+
+    # ...
+end</code></pre>
 
         </div>
       
 
       
-        <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
+        <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
 /lib/ex_parsec.ex#L1" class="view_source">Source</a>
       
 
@@ -167,8 +190,8 @@ can optionally be given to parse with user state.</p>
 </ul>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec.ex#L72" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec.ex#L98" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -192,8 +215,8 @@ can optionally be given to parse with user state.</p>
 and forwards to <a href="#parse/3"><code class="inline">parse/3</code></a>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec.ex#L93" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec.ex#L119" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -217,8 +240,8 @@ and forwards to <a href="#parse/3"><code class="inline">parse/3</code></a>.</p>
 and forwards to <a href="#parse/3"><code class="inline">parse/3</code></a>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec.ex#L115" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec.ex#L141" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -242,8 +265,8 @@ and forwards to <a href="#parse/3"><code class="inline">parse/3</code></a>.</p>
 and forwards to <a href="#parse/3"><code class="inline">parse/3</code></a>.</p>
 </div>
   
-    <a href="https://github.com/alexrp/ex_parsec/blob/5066b6c5224e7dc904f5d6e6989219862aff0034
-/lib/ex_parsec.ex#L104" class="view_source">Source</a>
+    <a href="https://github.com/alexrp/ex_parsec/blob/0e4f060d6c20ecc0db5387c3fcb00a219db46a6c
+/lib/ex_parsec.ex#L130" class="view_source">Source</a>
   
 </div>
 
