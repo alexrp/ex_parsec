@@ -4,8 +4,8 @@ ghp = "gh-pages"
 {_, 0} = System.cmd("git", ["checkout", ghp])
 paths = Path.wildcard("*", [match_dot: true])
 Enum.each(paths, fn(p) -> if !(p in [".git", "docs"]), do: File.rm_rf!(p) end)
-File.cp_r! "docs/.", "."
-File.rm_rf! "docs"
+File.cp_r!("docs/.", ".")
+File.rm_rf!("docs")
 {_, 0} = System.cmd("git", ["add", "--all"])
 {_, 0} = System.cmd("git", ["commit", "--message", "\"Update documentation.\""])
 {_, 0} = System.cmd("git", ["push", "origin", ghp])
