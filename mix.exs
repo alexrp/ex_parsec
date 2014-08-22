@@ -29,7 +29,9 @@ defmodule ExParsec.Mixfile do
     end
 
     defp docs() do
-        {ref, 0} = System.cmd("git", ["rev-parse", "--verify", "--quiet", "HEAD"])
+        {ref, x} = System.cmd("git", ["rev-parse", "--verify", "--quiet", "HEAD"])
+
+        if x != 0, do: ref = "master"
 
         [main: "README",
          readme: true,
