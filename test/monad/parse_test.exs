@@ -1,7 +1,6 @@
 defmodule Test.ExParsec.Monad.Parse do
     use ExUnit.Case, async: true
 
-    import ExParsec.Base
     import ExParsec.Text
 
     require ExParsec.Monad.Parse
