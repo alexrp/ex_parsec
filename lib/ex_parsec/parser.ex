@@ -65,7 +65,7 @@ defmodule ExParsec.Parser do
                     true -> nil
                 end
 
-                {%__MODULE__{input: inp, position: pos}, data}
+                {%__MODULE__{input: inp, position: pos, state: parser.state}, data}
         end
     end
 end
