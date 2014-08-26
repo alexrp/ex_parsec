@@ -48,10 +48,19 @@ defmodule ExParsec.Mixfile do
 
     defp aliases() do
         [make: ["deps.get", "deps.compile", "docs"],
-         test: ["test --trace --cover"]]
+         test: ["test --trace --cover"],
+         wipe: ["clean", &wipe/1]]
     end
 
     defp coverage() do
         [tool: Coverex.Task]
+    end
+
+    defp wipe(_) do
+        File.rm_rf!("_build")
+        File.rm_rf!(Path.join("bench", "graphs"))
+        File.rm_rf!(Path.join("bench", "snapshots"))
+        File.rm_rf!("cover")
+        File.rm_rf!("docs")
     end
 end
