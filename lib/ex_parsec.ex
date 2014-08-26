@@ -47,11 +47,11 @@ defmodule ExParsec do
     """
 
     alias ExParsec.Error
-    alias ExParsec.Input.BinaryInput
     alias ExParsec.Input.FileInput
     alias ExParsec.Input.MemoryInput
     alias ExParsec.Input
     alias ExParsec.Parser
+    alias ExParsec.Position
     alias ExParsec.Reply
 
     @doc false
@@ -85,18 +85,21 @@ defmodule ExParsec do
 
     @doc """
     Parses the given `input` by applying the parser `function` to it. `state`
-    can optionally be given to parse with user state.
+    can optionally be given to parse with user state. `position` defines the
+    initial input position. By default, it's set to a default-initialized
+    `ExParsec.Position` instance. It should be `nil` for non-text, non-token
+    inputs.
 
     Returns either:
 
     * A tuple containing `:ok`, the final user state, and the result.
     * A tuple containing `:error` and a list of `ExParsec.Error` instances.
     """
-    @spec parse(Input.t(), t(state, result), state) ::
+    @spec parse(Input.t(), t(state, result), Position.t() | nil, state) ::
           {:ok, state, result} | {:error, [Error.t()]}
           when [state: var, result: var]
-    def parse(input, function, state \\ nil) do
-        parser = %Parser{input: input, state: state}
+    def parse(input, function, state \\ nil, position \\ %Position{}) do
+        parser = %Parser{input: input, position: position, state: state}
         reply = function.(parser)
 
         case reply.status do
@@ -110,30 +113,41 @@ defmodule ExParsec do
     end
 
     @doc """
-    Constructs an `ExParsec.Input.BinaryInput` instance with the given `value`
-    and forwards to `parse/3`.
-    """
-    @spec parse_binary(bitstring(), t(state, result), state) ::
-          {:ok, state, result} | {:error, [Error.t()]}
-          when [state: var, result: var]
-    def parse_binary(value, function, state \\ nil) do
-        parse(%BinaryInput{value: value}, function, state)
-    end
-
-    @doc """
     Constructs an `ExParsec.Input.MemoryInput` instance with the given `value`
-    and forwards to `parse/3`.
+    (a string or list of codepoints) and forwards to `parse/4`.
     """
-    @spec parse_value(String.t() | [term()], t(state, result), state) ::
+    @spec parse_text(String.t() | [String.codepoint()], t(state, result), state) ::
           {:ok, state, result} | {:error, [Error.t()]}
           when [state: var, result: var]
-    def parse_value(value, function, state \\ nil) do
+    def parse_text(value, function, state \\ nil) do
         parse(%MemoryInput{value: value}, function, state)
     end
 
     @doc """
+    Constructs an `ExParsec.Input.MemoryInput` instance with the given `value`
+    (a bitstring) and forwards to `parse/4`.
+    """
+    @spec parse_bitstring(bitstring(), t(state, result), state) ::
+          {:ok, state, result} | {:error, [Error.t()]}
+          when [state: var, result: var]
+    def parse_bitstring(value, function, state \\ nil) do
+        parse(%MemoryInput{value: value, is_string: false}, function, state, nil)
+    end
+
+    @doc """
+    Constructs an `ExParsec.Input.MemoryInput` instance with the given `list`
+    of terms (e.g. tokens) and forwards to `parse/4`.
+    """
+    @spec parse_terms([term()], t(state, result), state) ::
+          {:ok, state, result} | {:error, [Error.t()]}
+          when [state: var, result: var]
+    def parse_terms(list, function, state \\ nil) do
+        parse(%MemoryInput{value: list, is_string: false}, function, state, nil)
+    end
+
+    @doc """
     Constructs an `ExParsec.Input.FileInput` instance with the given `device`
-    and forwards to `parse/3`.
+    and forwards to `parse/4`.
     """
     @spec parse_file(File.io_device(), t(state, result), state) ::
           {:ok, state, result} | {:error, [Error.t()]}
