@@ -396,7 +396,7 @@ defmodule ExParsec.Base do
     @doc """
     Applies `parser´ one or more times. Discards the results.
     """
-    @spec skip_many(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
+    @spec skip_many1(ExParsec.t(state, term())) :: ExParsec.t(state, nil)
           when [state: var]
     defparser skip_many1(parser) in p do
         # TODO: Optimize this so we don't build up a ton of data.
