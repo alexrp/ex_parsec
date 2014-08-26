@@ -10,6 +10,10 @@ defmodule ExParsec do
     * `ExParsec.Base`
     * `ExParsec.Helpers`
 
+    It will also `require` the following modules:
+
+    * `ExParsec.Monad.Parse`
+
     It will also `alias` the following modules:
 
     * `ExParsec.Error`
@@ -64,6 +68,8 @@ defmodule ExParsec do
             import ExParsec.Helpers
 
             import unquote(mod)
+
+            require ExParsec.Monad.Parse
 
             alias ExParsec.Error
             alias ExParsec.Input
