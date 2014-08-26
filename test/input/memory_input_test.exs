@@ -8,30 +8,23 @@ defmodule Test.ExParsec.Input.MemoryInput do
         value = "foo"
         input = %MemoryInput{value: value}
 
-        {input, cp1} = Input.get(input)
-        {input, cp2} = Input.get(input)
-        {input, cp3} = Input.get(input)
-        eof = Input.get(input)
-
-        assert cp1 == "f"
-        assert cp2 == "o"
-        assert cp3 == "o"
-        assert eof == :eof
+        assert {input, "f"} = Input.get(input)
+        assert {input, "o"} = Input.get(input)
+        assert {input, "o"} = Input.get(input)
+        assert :eof = Input.get(input)
     end
 
     test "get noncharacter" do
         value = "\x{0fffe}"
         input = %MemoryInput{value: value}
-        result = Input.get(input)
 
-        assert result == {:error, :noncharacter}
+        assert {:error, :noncharacter} = Input.get(input)
     end
 
     test "empty get" do
         value = ""
         input = %MemoryInput{value: value}
-        result = Input.get(input)
 
-        assert result == :eof
+        assert :eof = Input.get(input)
     end
 end
