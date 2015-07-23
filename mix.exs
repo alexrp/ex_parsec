@@ -6,7 +6,7 @@ defmodule ExParsec.Mixfile do
          description: "A parser combinator library inspired by Parsec.",
          app: :ex_parsec,
          version: "0.2.1",
-         elixir: "~> 0.15.1",
+         elixir: "~> 1.0",
          source_url: "https://github.com/alexrp/ex_parsec",
          homepage_url: "https://hex.pm/packages/ex_parsec",
          deps: deps(),
