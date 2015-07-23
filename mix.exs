@@ -21,12 +21,12 @@ defmodule ExParsec.Mixfile do
     end
 
     defp deps() do
-        [{:benchfella, github: "alco/benchfella", only: [:dev]},
-         {:coverex, "~> 0.0.7", only: [:test]},
-         {:dialyze, "~> 0.1.2", only: [:dev]},
-         {:earmark, "~> 0.1.10", only: [:dev]},
-         {:ex_doc, "~> 0.5.2", only: [:dev]},
-         {:monad, "~> 1.0.3"}]
+        [{:monad, "~> 1.0.4"},
+         {:benchfella, "~> 0.2.1", only: :dev},
+         {:dialyze, "~> 0.2.0", only: :dev},
+         {:coverex, "~> 1.4.1", only: :test},
+         {:earmark, "~> 0.1.17", only: :docs},
+         {:ex_doc, "~> 0.5", only: :docs}]
     end
 
     defp docs() do
