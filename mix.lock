@@ -1,6 +1,11 @@
-%{"benchfella": {:git, "git://github.com/alco/benchfella.git", "aea9290e135afadaeda0c6098451741e14280643", []},
-  "coverex": {:package, "0.0.7"},
-  "dialyze": {:package, "0.1.2"},
-  "earmark": {:package, "0.1.10"},
-  "ex_doc": {:package, "0.5.2"},
-  "monad": {:package, "1.0.3"}}
+%{"benchfella": {:hex, :benchfella, "0.2.1"},
+  "coverex": {:hex, :coverex, "1.4.1"},
+  "dialyze": {:hex, :dialyze, "0.2.0"},
+  "earmark": {:hex, :earmark, "0.1.17"},
+  "ex_doc": {:hex, :ex_doc, "0.7.3"},
+  "hackney": {:hex, :hackney, "1.2.0"},
+  "httpoison": {:hex, :httpoison, "0.7.0"},
+  "idna": {:hex, :idna, "1.0.2"},
+  "monad": {:hex, :monad, "1.0.4"},
+  "poison": {:hex, :poison, "1.4.0"},
+  "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}
