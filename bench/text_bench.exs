@@ -1,11 +1,10 @@
-Code.require_file(Path.join("bench", "bench.exs"))
-
 defmodule Bench.ExParsec.Text do
-    use Bench.ExParsec, mode: Text
+    use ExParsec, mode: Text
+    use Benchfella
 
     @chars "sdfgjakghvnlkasjlghavsdjlkfhgvaskljmtvmslkdgfdaskl"
 
-    bench_text "many any_char", @chars do
-        many(any_char())
+    bench "many any_char" do
+        ExParsec.parse_text(@chars, many(any_char()))
     end
 end
